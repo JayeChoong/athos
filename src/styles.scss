@@ -1,0 +1,34 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/scss/bootstrap';
+@import url(//db.onlinewebfonts.com/c/402a6ee50d28e7cea0f74f93601c4802?family=Dumbnerd);
+@import url(//db.onlinewebfonts.com/c/bd317adf74e5e7e564eb61ce9926cc6d?family=Gotham);
+
+body {
+    line-height: 1.5 !important;
+    letter-spacing: 1px !important;
+    font-family: Gotham !important;
+}
+
+.primary-font {
+    font-family: Dumbnerd !important;
+}
+
+.neon-pink {
+    color: #F80789;
+}
+
+.neon-blue {
+    color: #0534F3;
+}
+
+.paper-white {
+    color: #D3D5D8
+}
+
+.container {
+    width: 90% !important;
+    margin: auto;
+    margin-bottom: 50px;
+}
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';

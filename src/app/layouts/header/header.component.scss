@@ -1,0 +1,101 @@
+.header {
+    height: 5vh;
+    align-items: center;
+    background: #ffffff;
+    a, span {
+        font-size: 20px;
+    }
+}
+
+.nav-item {
+    transition: all 0.5s ease;
+
+    h1 {
+        font-size: 60px;
+    }
+}
+
+.text-menu{
+    a {
+        font-size: 20px;
+    }
+    transition: all 0.5s ease;
+}
+
+.nav-item:hover {
+    letter-spacing: 15px;
+    cursor: pointer;
+}
+
+.text-menu:hover{
+    letter-spacing: 10px;
+    cursor: pointer;
+}
+
+.text-shadows {
+    text-transform: uppercase;
+    color: #000000;
+    animation: shadows 1.5s linear infinite;
+}
+
+.offcanvas {
+    background: #000000;
+    color: #ffffff;
+    width: 100%;
+}
+
+.text-close {
+    padding: 5px 12px;
+    height: 5vh;
+}
+
+@keyframes shadows {
+    0% {
+        text-shadow: none;
+    }
+
+    25% {
+        text-shadow: 2px 2px 0 red;
+    }
+
+    50% {
+        text-shadow: 2px 2px 0 red,
+            4px 4px 0 blue;
+    }
+
+    75% {
+        text-shadow: 2px 2px 0 red;
+    }
+
+    100% {
+        text-shadow: none;
+    }
+}
+
+@keyframes move {
+    0% {
+        transform: translate(0px, 0px);
+    }
+
+    25% {
+        transform: translate(-5px, -5px);
+    }
+
+    50% {
+        transform: translate(-10px, -10px);
+    }
+
+    75% {
+        transform: translate(-5px, -5px);
+    }
+
+    100% {
+        transform: translate(0px, 0px);
+    }
+}
+
+@media only screen and (max-width: 1250px) {
+    .mobile {
+        display: none;
+    }
+}

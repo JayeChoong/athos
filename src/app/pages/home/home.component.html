@@ -1,0 +1,101 @@
+<div class="carousel-container" id="Home">
+    <!-- <ngb-carousel [showNavigationIndicators]="false" (slide)=onSlide($event)>
+        <ng-template ngbSlide>
+            <video class="w-100 desktop" loop>
+                <source src="./assets/athos-logo-desktop.mp4" type="video/mp4" />
+            </video>
+            <video class="w-100 mobile" loop>
+                <source class="mobile" src="./assets/athos-logo-mobile.mp4" type="video/mp4" />
+            </video>
+        </ng-template>
+        <ng-template ngbSlide>
+            <video class="w-100 desktop" loop>
+                <source src="./assets/athos-desktop.mp4" type="video/mp4" />
+            </video>
+            <video class="w-100 mobile" loop>
+                <source src="./assets/athos-mobile.mp4" type="video/mp4" />
+            </video>
+        </ng-template>
+    </ngb-carousel> -->
+
+    <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div id="activeCarousel" class="carousel-item active" data-bs-interval="6000">
+                <video class="w-100 desktop" loop oncanplay="this.play()">
+                    <source src="./assets/athos-logo-desktop.mp4" type="video/mp4"/>
+                </video>
+                <video class="w-100 mobile" loop oncanplay="this.play()">
+                    <source class="mobile" src="./assets/athos-logo-mobile.mp4" type="video/mp4" />
+                </video>
+            </div>
+            <div id="activeCarousel" class="carousel-item" data-bs-interval="10000">
+                <video class="w-100 desktop" loop oncanplay="this.play()">
+                    <source src="./assets/athos-desktop.mp4" type="video/mp4" />
+                </video>
+                <video class="w-100 mobile" loop oncanplay="this.play()">
+                    <source src="./assets/athos-mobile.mp4" type="video/mp4" />
+                </video>
+            </div>
+            <!-- <div class="carousel-item">
+                <img class="desktop w-100" src="./assets/athos-2-desktop.png">
+                <img class="mobile w-100" src="./assets/athos-2-mobile.png">
+            </div>
+            <div class="carousel-item">
+                <img class="desktop w-100" src="./assets/athos-1-desktop.png">
+                <img class="mobile w-100" src="./assets/athos-1-mobile.png">
+            </div> -->
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel"
+            data-bs-slide="prev">
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel"
+            data-bs-slide="next">
+        </button>
+    </div>
+</div>
+
+<div class="content">
+    <img src="./assets/athos-background.jpg" class="background-img">
+    <div class="about-container" id="AboutUs">
+        <h1 class="primary-font">ABOUT ATHOS ATHLETE</h1>
+        <img src="./assets/about.png" class="about-img" alt="about-athos">
+        <p>At Athos, we strive to be the catalyst for better sports apparel for all sportsmans. Our products, our
+            people and the stories we share elevate sport, champion sportsmanship, and cultivate the mindset of breaking
+            limits in both aspects of sports and lives.</p>
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <img src="./assets/about-vision.png" class="about-img" alt="about-vision">
+                <h3 class="primary-font pt-3">Our Vision</h3>
+                <p>We aim to be a leading sporting goods manufacturer in APAC and constantly be at the forefront of
+                    innovative fabric technology.</p>
+            </div>
+            <div class="col-md-4">
+                <img src="./assets/about-mision.png" class="about-img" alt="about-mision">
+                <h3 class="primary-font pt-3">Our Mision</h3>
+                <p>We dedicate ourselves to developing a successful business by offering our customers an excellent
+                    range of quality and customization of products for sports.</p>
+            </div>
+            <div class="col-md-4">
+                <img src="./assets/about-attitude.png" class="about-img" alt="about-attitude">
+                <h3 class="primary-font pt-3">Our Attitude</h3>
+                <p>Challenges ahead of us are like mountains and stumbling blocks. At Athos Athlete, we seek no
+                    shortcut and are ready at all times to prevail.</p>
+            </div>
+        </div>
+    </div>
+    <div class="footer" id="ContactUs">
+        <h6>ATHOS INNOVATION SDN.BHD. 202201020251(1465948-D)</h6>
+        <p>No.3, Jalan Mutiara Emas 6/1A,<br>
+            Taman Mount Austin, 81100 Johor Bahru,<br>
+            Johor, Malaysia</p>
+        <a href="mailto:general@athosathlete.com">general@athosathlete.com</a>
+        <div class="social-media pt-3">
+            <a href="https://www.facebook.com/profile.php?id=100083466349340" target="_blank"><img
+                    src="./assets/facebook.png"></a> <a href="https://instagram.com/athos.athlete?igshid=NmNmNjAwNzg="
+                target="_blank"><img src="./assets/instagram.png"></a> <a
+                href="https://www.linkedin.com/company/athos-athlete/" target="_blank"><img
+                    src="./assets/linkedin.png"></a>
+
+        </div>
+    </div>
+</div>
