@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+
 
 @Component({
   selector: 'app-home',
@@ -6,20 +7,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  showNavigationArrows = false;
 
 
   constructor() {
-   }
+  }
+
 
   ngOnInit(): void {
-    // const carousel = document.getElementById('activeCarousel');
-    // const video = document.querySelector('video');
-    // if (carousel?.className === 'carousel-item') {
-    //   video?.pause();
-    // } else if (carousel?.className === 'carousel-item active') {
-    //   video?.play();
-    // }
+    const myCarousel = document.getElementById('bannerCarousel');
+    myCarousel!.addEventListener('slide.bs.carousel', function () {
+      // const activeCarousel = document.getElementsByClassName('carousel-item active');
+      const video = document.querySelector('video');
+          video!.play();
+    })
+
+    // fromEvent(this.carousel.nativeElement, 'slid.bs.carousel').subscribe(( data : any)=>  // slide.bs.carousel or slid.bs.carousel 
+    // {
+    //      // Look for the video element that have Active class using Selector? or document.querySelector?
+    //      //  
+    //      @ViewChild('activeVideoPlayer') videoplayer: ElementRef; // ACTIVE VIDEO
+    //      this.videoplayer?.nativeElement.play();
+    //     @ViewChild('inactiveVideoPlayer') videoplayer: ElementRef; // INACTIVE VIDEO
+    //     this.videoplayer?.nativeElement.stop(); // or pause() ??
+
+    // });
   }
 
 

@@ -18,21 +18,21 @@
         </ng-template>
     </ngb-carousel> -->
 
-    <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-pause="false">
         <div class="carousel-inner">
-            <div id="activeCarousel" class="carousel-item active" data-bs-interval="6000">
-                <video class="w-100 desktop" loop oncanplay="this.play()">
-                    <source src="./assets/athos-logo-desktop.mp4" type="video/mp4"/>
+            <div class="carousel-item active" data-bs-interval="6000">
+                <video class="w-100 desktop">
+                    <source src="./assets/athos-logo-desktop.mp4" type="video/mp4" />
                 </video>
-                <video class="w-100 mobile" loop oncanplay="this.play()">
+                <video class="w-100 mobile" oncanplay="this.play()" autoplay="true" onloadedmetadata="this.muted = true"  loop>
                     <source class="mobile" src="./assets/athos-logo-mobile.mp4" type="video/mp4" />
                 </video>
             </div>
-            <div id="activeCarousel" class="carousel-item" data-bs-interval="10000">
-                <video class="w-100 desktop" loop oncanplay="this.play()">
+            <div class="carousel-item" data-bs-interval="10000">
+                <video class="w-100 desktop" oncanplay="this.play()" autoplay="true" onloadedmetadata="this.muted = true"  loop>
                     <source src="./assets/athos-desktop.mp4" type="video/mp4" />
                 </video>
-                <video class="w-100 mobile" loop oncanplay="this.play()">
+                <video class="w-100 mobile" oncanplay="this.play()" autoplay="true" onloadedmetadata="this.muted = true"  loop>
                     <source src="./assets/athos-mobile.mp4" type="video/mp4" />
                 </video>
             </div>
@@ -45,11 +45,9 @@
                 <img class="mobile w-100" src="./assets/athos-1-mobile.png">
             </div> -->
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel"
-            data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel"
-            data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
         </button>
     </div>
 </div>
@@ -91,11 +89,13 @@
         <a href="mailto:general@athosathlete.com">general@athosathlete.com</a>
         <div class="social-media pt-3">
             <a href="https://www.facebook.com/profile.php?id=100083466349340" target="_blank"><img
-                    src="./assets/facebook.png"></a> <a href="https://instagram.com/athos.athlete?igshid=NmNmNjAwNzg="
-                target="_blank"><img src="./assets/instagram.png"></a> <a
-                href="https://www.linkedin.com/company/athos-athlete/" target="_blank"><img
+                    src="./assets/facebook.png"></a>
+            <a href="https://instagram.com/athos.athlete?igshid=NmNmNjAwNzg=" target="_blank"><img
+                    src="./assets/instagram.png"></a>
+            <a href="https://www.linkedin.com/company/athos-athlete/" target="_blank"><img
                     src="./assets/linkedin.png"></a>
-
+            <a href="https://api.whatsapp.com/send?phone=601152224333" target="_blank"><img
+                    src="./assets/whatsapp.png"></a>
         </div>
     </div>
 </div>
