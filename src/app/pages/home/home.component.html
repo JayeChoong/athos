@@ -1,49 +1,35 @@
 <div class="carousel-container" id="Home">
-    <!-- <ngb-carousel [showNavigationIndicators]="false" (slide)=onSlide($event)>
-        <ng-template ngbSlide>
-            <video class="w-100 desktop" loop>
-                <source src="./assets/athos-logo-desktop.mp4" type="video/mp4" />
-            </video>
-            <video class="w-100 mobile" loop>
-                <source class="mobile" src="./assets/athos-logo-mobile.mp4" type="video/mp4" />
-            </video>
-        </ng-template>
-        <ng-template ngbSlide>
-            <video class="w-100 desktop" loop>
-                <source src="./assets/athos-desktop.mp4" type="video/mp4" />
-            </video>
-            <video class="w-100 mobile" loop>
-                <source src="./assets/athos-mobile.mp4" type="video/mp4" />
-            </video>
-        </ng-template>
-    </ngb-carousel> -->
-
-    <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-pause="false">
+    <div id="desktopCarousel" class="carousel slide desktop" data-bs-ride="carousel" data-bs-pause="false">
         <div class="carousel-inner">
             <div class="carousel-item active" data-bs-interval="6000">
-                <video class="w-100 desktop">
+                <video class="w-100">
                     <source src="./assets/athos-logo-desktop.mp4" type="video/mp4" />
-                </video>
-                <video class="w-100 mobile" oncanplay="this.play()" autoplay="true" onloadedmetadata="this.muted = true"  loop>
-                    <source class="mobile" src="./assets/athos-logo-mobile.mp4" type="video/mp4" />
                 </video>
             </div>
             <div class="carousel-item" data-bs-interval="10000">
-                <video class="w-100 desktop" oncanplay="this.play()" autoplay="true" onloadedmetadata="this.muted = true"  loop>
+                <video class="w-100">
                     <source src="./assets/athos-desktop.mp4" type="video/mp4" />
                 </video>
-                <video class="w-100 mobile" oncanplay="this.play()" autoplay="true" onloadedmetadata="this.muted = true"  loop>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+        </button>
+    </div>
+
+    <div id="mobileCarousel" class="carousel slide mobile" data-bs-ride="carousel" data-bs-pause="false">
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="6000">
+                <video class="w-100">
+                    <source  src="./assets/athos-logo-mobile.mp4" type="video/mp4" />
+                </video>
+            </div>
+            <div class="carousel-item" data-bs-interval="10000">
+                <video class="w-100">
                     <source src="./assets/athos-mobile.mp4" type="video/mp4" />
                 </video>
             </div>
-            <!-- <div class="carousel-item">
-                <img class="desktop w-100" src="./assets/athos-2-desktop.png">
-                <img class="mobile w-100" src="./assets/athos-2-mobile.png">
-            </div>
-            <div class="carousel-item">
-                <img class="desktop w-100" src="./assets/athos-1-desktop.png">
-                <img class="mobile w-100" src="./assets/athos-1-mobile.png">
-            </div> -->
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
         </button>

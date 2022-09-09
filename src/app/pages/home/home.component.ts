@@ -1,5 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -12,25 +11,26 @@ export class HomeComponent implements OnInit {
   constructor() {
   }
 
-
   ngOnInit(): void {
-    const myCarousel = document.getElementById('bannerCarousel');
-    myCarousel!.addEventListener('slide.bs.carousel', function () {
-      // const activeCarousel = document.getElementsByClassName('carousel-item active');
-      const video = document.querySelector('video');
-          video!.play();
-    })
+    const video = document.querySelectorAll('video');
+    const w = window.innerWidth;
+    let myCarousel: any;
 
-    // fromEvent(this.carousel.nativeElement, 'slid.bs.carousel').subscribe(( data : any)=>  // slide.bs.carousel or slid.bs.carousel 
-    // {
-    //      // Look for the video element that have Active class using Selector? or document.querySelector?
-    //      //  
-    //      @ViewChild('activeVideoPlayer') videoplayer: ElementRef; // ACTIVE VIDEO
-    //      this.videoplayer?.nativeElement.play();
-    //     @ViewChild('inactiveVideoPlayer') videoplayer: ElementRef; // INACTIVE VIDEO
-    //     this.videoplayer?.nativeElement.stop(); // or pause() ??
+    if (w > 1250) {
+      myCarousel = document.getElementById('desktopCarousel');
+      video[0].play();
+    } else if (w <= 1250) {
+      myCarousel = document.getElementById('mobileCarousel');
+      video[2].play()
+    };
 
-    // });
+    myCarousel!.addEventListener('slide.bs.carousel', function (evt: any) {
+      if (w > 1250) {
+        video[evt.to].play();
+      } else if (w <= 1250) {
+        video[evt.to + 2].play();
+      };
+    });
   }
 
 
