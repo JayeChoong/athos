@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-
   constructor() {
   }
 
@@ -19,19 +18,21 @@ export class HomeComponent implements OnInit {
     if (w > 1250) {
       myCarousel = document.getElementById('desktopCarousel');
       video[0].play();
+      video[0].muted = true;
     } else if (w <= 1250) {
       myCarousel = document.getElementById('mobileCarousel');
-      video[2].play()
+      video[2].play();
+      video[2].muted = true;
     };
 
     myCarousel!.addEventListener('slide.bs.carousel', function (evt: any) {
       if (w > 1250) {
         video[evt.to].play();
+        video[evt.to].muted = true;
       } else if (w <= 1250) {
         video[evt.to + 2].play();
+        video[evt.to + 2].muted = true;
       };
     });
   }
-
-
 }

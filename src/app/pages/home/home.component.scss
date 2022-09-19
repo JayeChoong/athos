@@ -68,6 +68,8 @@
     }
 }
 
-// .carousel-control-prev-icon, .carousel-control-next-icon {
-//     background-image: none !important;
-// }
+.mobile {
+    .carousel-inner {
+        height: 95vh;
+    }
+}
