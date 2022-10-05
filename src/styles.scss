@@ -1,7 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/scss/bootstrap';
-@import url(//db.onlinewebfonts.com/c/402a6ee50d28e7cea0f74f93601c4802?family=Dumbnerd);
-@import url(//db.onlinewebfonts.com/c/bd317adf74e5e7e564eb61ce9926cc6d?family=Gotham);
+// @import url(//db.onlinewebfonts.com/c/402a6ee50d28e7cea0f74f93601c4802?family=Dumbnerd);
+// @import url(//db.onlinewebfonts.com/c/bd317adf74e5e7e564eb61ce9926cc6d?family=Gotham);
+
+@font-face {
+    font-family: 'Dumbnerd';
+    src: url('./assets/fonts/402a6ee50d28e7cea0f74f93601c4802.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Gotham';
+    src: url('./assets/fonts/bd317adf74e5e7e564eb61ce9926cc6d.woff2') format('woff2');
+}
+
 
 body {
     line-height: 1.5 !important;
