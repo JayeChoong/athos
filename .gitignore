@@ -1,4 +1,10 @@
 dist/
-*.sh
 node_modules
 .angular/cache/*
+
+# scripts
+**/*.sh
+
+# MAC
+**/*.DS_STORE
+
