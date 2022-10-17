@@ -19,6 +19,10 @@ body {
     font-family: Gotham !important;
 }
 
+.cursor {
+    cursor: pointer;
+}
+
 .primary-font {
     font-family: Dumbnerd !important;
 }
@@ -40,5 +44,10 @@ body {
     margin: auto;
     margin-bottom: 50px;
 }
-/* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
+
+.content {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 5%;
+    min-height: 100vh
+}
+

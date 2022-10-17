@@ -1,0 +1,62 @@
+<div class="content">
+    <div class="row py-2">
+        <div class="col-6">
+            <tabset class="tabs">
+                <tab heading="All Products" id="all"></tab>
+                <ng-container *ngFor="let itm of catList">
+                    <tab [heading]="itm.name" (selectTab)="onSelectCat($event)" [id]="itm.id"></tab>
+                </ng-container>
+            </tabset>
+
+            <!-- <div class="btn-group" dropdown>
+                <button id="button-animated" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+                        aria-controls="dropdown-animated">
+                  Button dropdown <span class="caret"></span>
+                </button>
+                <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu"
+                    role="menu" aria-labelledby="button-animated">
+                    <ng-container *ngFor="let itm of catList">
+                        <li role="menuitem"><a class="dropdown-item" href="#">{{itm.name}}</a></li>
+
+                        <tab [heading]="itm.name" (selectTab)="onSelectCat($event)" [id]="itm.id"></tab>
+                    </ng-container>
+                  <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
+                  <li role="menuitem"><a class="dropdown-item" href="#">Another action</a>
+                  </li>
+                  <li role="menuitem"><a class="dropdown-item" href="#">Something else
+                    here</a></li>
+                </ul>
+              </div> -->
+        </div>
+        <div class="col-6  text-end">
+            <!-- <button type="button" class="btn show-filter" [ngClass]="{'show-filter-active': isFilter }"
+                (click)="filterPrds('F')">Sort By</button> -->
+            <button type="button" class="btn show-search" [ngClass]="{'show-search-active': isSearch }"
+                (click)="filterPrds('S')">Search</button>
+        </div>
+        <!-- <div *ngIf="isFilter" class="py-3">is Filter</div> -->
+        <div *ngIf="isSearch" class="py-3">
+            <form [formGroup]="searchForm">
+                <input class="form-control" type="text" (keyup.enter)="searchPrd($event)" placeholder="Search" formControlName="keyword">
+            </form>
+        </div>
+    </div>
+    <div>
+        <div class="row">
+            <div class="col-md-3 col-sm-6" *ngFor="let itm of prdList">
+                <div class="card cursor" (click)="getPrdDtls(itm)"> <img [src]="itm.image"
+                        (error)="updateUrl($event, itm)" class="card-img-top" alt="about-athos">
+                    <div class="card-body">
+                        <h5 class="card-title">{{itm.title}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            <span *ngFor="let it of catList">
+                                {{itm.category === it.id ? it.name : ''}}
+                            </span>
+                        </h6>
+                        <p class="card-text">{{itm.price | currency}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

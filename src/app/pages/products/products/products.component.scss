@@ -1,0 +1,75 @@
+.card {
+    transition: 0.5s;
+    margin: 5px;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+
+
+.show-search,
+.show-filter {
+    position: relative;
+    border: 1px solid #0534F3;
+    border-radius: 5px;
+    padding: 5px 10px;
+    display: inline-block;
+    margin: 5px;
+    color: #0534F3;
+}
+
+.show-search-active,
+.show-filter-active {
+    position: relative;
+    border: 1px solid #F80789;
+    background-color: #F80789;
+    border-radius: 5px;
+    padding: 5px 10px;
+    display: inline-block;
+    margin: 5px;
+    color: #fff;
+}
+
+.show-search:hover,
+.show-filter:hover {
+    background-color: #F80789;
+    border-color: #F80789;
+    color: #fff;
+
+}
+
+::ng-deep .nav-tabs {
+    --bs-nav-tabs-link-active-color: #fff;
+    --bs-nav-tabs-link-active-bg: #F80789;
+    --bs-nav-tabs-link-active-border-color: #f80789;
+    --bs-nav-tabs-border-color: none;
+    --bs-nav-tabs-link-hover-border-color: #f80789;
+
+    .nav-link {
+        border-radius: 5px
+    }
+}
+
+::ng-deep .nav {
+    --bs-nav-link-color: #0534F3;
+    --bs-nav-link-hover-color: #f80789;
+}
+
+// .show-search::after:active,
+// .show-filter::after:active{
+//     content: "";
+//     position: absolute;
+//     display: block;
+//     width: 14px;
+//     height: 14px;
+//     background-color: #717fe0;
+//     border-left: 1px solid #717fe0;
+//     border-bottom: 1px solid #717fe0;
+//     transform-origin: center center;
+//     transform: rotate(-45deg);
+//     left: calc(50% - 7px);
+//     bottom: -8px;
+//     transition: all 0.4s;
+// }

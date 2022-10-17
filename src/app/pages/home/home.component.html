@@ -2,7 +2,7 @@
     <div id="desktopCarousel" class="carousel slide desktop" data-bs-ride="carousel" data-bs-pause="false">
         <div class="carousel-inner">
             <div class="carousel-item active" data-bs-interval="6000">
-                <video class="w-100" oncanplay="this.play()" onloadedmetadata="this.muted = true"> 
+                <video class="w-100" oncanplay="this.play()" onloadedmetadata="this.muted = true">
                     <source src="./assets/athos-logo-desktop.mp4" type="video/mp4" />
                 </video>
             </div>
@@ -12,17 +12,17 @@
                 </video>
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+        <!-- <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
         </button>
         <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
-        </button>
+        </button> -->
     </div>
 
     <div id="mobileCarousel" class="carousel slide mobile" data-bs-ride="carousel" data-bs-pause="false">
         <div class="carousel-inner">
             <div class="carousel-item active" data-bs-interval="6000">
                 <video class="w-100" oncanplay="this.play()" onloadedmetadata="this.muted = true">
-                    <source  src="./assets/athos-logo-mobile.mp4" type="video/mp4" />
+                    <source src="./assets/athos-logo-mobile.mp4" type="video/mp4" />
                 </video>
             </div>
             <div class="carousel-item" data-bs-interval="10000">
@@ -31,15 +31,14 @@
                 </video>
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+        <!-- <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
         </button>
         <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
-        </button>
+        </button> -->
     </div>
 </div>
 
 <div class="content">
-    <img src="./assets/athos-background.jpg" class="background-img">
     <div class="about-container" id="AboutUs">
         <h1 class="primary-font">ABOUT ATHOS ATHLETE</h1>
         <img src="./assets/about.png" class="about-img" alt="about-athos">
@@ -66,6 +65,70 @@
                     shortcut and are ready at all times to prevail.</p>
             </div>
         </div>
+    </div>
+    <div class="catalogue" id="Catalogue">
+        <carousel [itemsPerSlide]="3" [showIndicators]="false" [singleSlideOffset]="true" [startFromIndex]="0"
+            [interval]="5000">
+            <div class="carousel-inner">
+            <slide *ngFor="let slide of slides; let index=index">
+                <div class="cat-card">
+                <video class="w-100" oncanplay="this.play()" onloadedmetadata="this.muted = true" loop>
+                    <source [src]="slide.image" type="video/mp4"/>
+                </video>
+            </div>
+            </slide>
+        </div>
+        </carousel>
+        <!-- <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="cards-wrapper">
+                        <div class="cat-card">
+                            <video class="w-100" oncanplay="this.play()" onloadedmetadata="this.muted = true">
+                                <source src="./assets/athos-logo-mobile.mp4" type="video/mp4" />
+                            </video>
+                        </div>
+                        <div class="cat-card d-none d-md-block">
+                            <video class="w-100" oncanplay="this.play()" onloadedmetadata="this.muted = true">
+                                <source src="./assets/athos-mobile.mp4" type="video/mp4" />
+                            </video>
+
+                        </div>
+                        <div class=" cat-card d-none d-md-block">
+                            <video class="w-100" oncanplay="this.play()" onloadedmetadata="this.muted = true">
+                                <source src="./assets/athos-logo-mobile.mp4" type="video/mp4" />
+                            </video>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="cards-wrapper">
+                        <div class="cat-card">
+                            <video class="w-100" oncanplay="this.play()" onloadedmetadata="this.muted = true">
+                                <source src="./assets/athos-mobile.mp4" type="video/mp4" />
+                            </video>
+                        </div>
+                        <div class="cat-card d-none d-md-block">
+                            <video class="w-100" oncanplay="this.play()" onloadedmetadata="this.muted = true">
+                                <source src="./assets/athos-logo-mobile.mp4" type="video/mp4" />
+                            </video>
+                        </div>
+                        <div class="cat-card d-none d-md-block">
+                            <video class="w-100" oncanplay="this.play()" onloadedmetadata="this.muted = true">
+                                <source src="./assets/athos-mobile.mp4" type="video/mp4" />
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              </button>
+       
+        </div> -->
     </div>
     <div class="footer" id="ContactUs">
         <h6>ATHOS INNOVATION SDN.BHD. 202201020251(1465948-D)</h6>

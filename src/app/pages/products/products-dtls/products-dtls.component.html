@@ -1,0 +1,24 @@
+<div class="content">
+    <div class="row prd-card">
+        <div class="col-6">
+            <img [src]="this.pS.selectedPrd.image" (error)="updateUrl($event)" class="card-img-top" alt="about-athos">
+        </div>
+        <div class="col-6">
+            <h1 class="card-title">{{this.pS.selectedPrd.title}}</h1>
+            <h3 class="card-subtitle mb-2 text-muted">
+                <span *ngFor="let it of catList">
+                    {{this.pS.selectedPrd.category === it.id ? it.name : ''}}
+                </span>
+            </h3>
+            <p class="card-text">{{this.pS.selectedPrd.price | currency}}</p>
+            <button class="btn btn-cart">Add To Bag</button>
+            <h4>{{this.pS.selectedPrd.description}}</h4>
+        </div>
+
+        <div class="text-center">
+            <h1>Recently View Items</h1>
+        </div>
+      
+    </div>
+ 
+</div>
