@@ -7,6 +7,7 @@
     font-family: 'Dumbnerd';
     src: url('./assets/fonts/402a6ee50d28e7cea0f74f93601c4802.woff2') format('woff2');
 }
+
 @font-face {
     font-family: 'Gotham';
     src: url('./assets/fonts/bd317adf74e5e7e564eb61ce9926cc6d.woff2') format('woff2');
@@ -47,7 +48,62 @@ body {
 
 .content {
     background-color: rgba(255, 255, 255, 0.8);
-    padding: 5%;
-    min-height: 100vh
+    padding: 3% 5%;
+    min-height: 70vh;
+
+    @media only screen and (max-width: 1250px) {
+
+        margin-top: 5vh;
+    }
 }
 
+.linear {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid #000;
+}
+
+.actionbtn {
+    margin: 5% auto;
+
+    button {
+        border-radius: 0;
+        width: 100%;
+        background: #000;
+        color: #fff;
+    }
+
+    button:focus {
+        background: #000;
+        color: #fff;
+    }
+}
+
+form {
+    .form-control {
+        height: 50px;
+        border: 1px solid #000;
+        border-radius: 0;
+    }
+
+    .form-control:focus {
+        border-color: #000;
+        box-shadow: 0 0 0 0.2rem rgba(270, 270, 270, 0.25);
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+}
+
+.is-invalid {
+    border-color: red !important;
+}
+
+.invalid-feedback {
+    color: red;
+}

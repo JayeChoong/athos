@@ -13,7 +13,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HeaderInterceptor } from './interceptors/header.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductsDtlsComponent } from './pages/products/products-dtls/products-dtls.component';
-
+import { LoginComponent } from './pages/login/login.component';
+import { CartComponent } from './pages/cart/cart.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { AlertModule } from 'ngx-bootstrap/alert';
+import { EditProfileComponent } from './pages/profile/edit-profile/edit-profile.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +26,13 @@ import { ProductsDtlsComponent } from './pages/products/products-dtls/products-d
     HeaderComponent,
     FooterComponent,
     HomeComponent,
+    ProductsDtlsComponent,
     ProductsComponent,
-    ProductsDtlsComponent
+    LoginComponent,
+    CartComponent,
+    ProfileComponent,
+    EditProfileComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -32,7 +42,8 @@ import { ProductsDtlsComponent } from './pages/products/products-dtls/products-d
     TabsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AlertModule
   ],
   providers: [
     {

@@ -1,4 +1,4 @@
-<div class="carousel-container" id="Home">
+<div class="carousel-container">
     <div id="desktopCarousel" class="carousel slide desktop" data-bs-ride="carousel" data-bs-pause="false">
         <div class="carousel-inner">
             <div class="carousel-item active" data-bs-interval="6000">
@@ -7,7 +7,7 @@
                 </video>
             </div>
             <div class="carousel-item" data-bs-interval="10000">
-                <video class="w-100" oncanplay="this.play()" onloadedmetadata="this.muted = true">
+                <video class="w-100" onloadedmetadata="this.muted = true">
                     <source src="./assets/athos-desktop.mp4" type="video/mp4" />
                 </video>
             </div>
@@ -26,7 +26,7 @@
                 </video>
             </div>
             <div class="carousel-item" data-bs-interval="10000">
-                <video class="w-100" oncanplay="this.play()" onloadedmetadata="this.muted = true">
+                <video class="w-100" onloadedmetadata="this.muted = true">
                     <source src="./assets/athos-mobile.mp4" type="video/mp4" />
                 </video>
             </div>
@@ -66,85 +66,23 @@
             </div>
         </div>
     </div>
-    <div class="catalogue" id="Catalogue">
-        <carousel [itemsPerSlide]="3" [showIndicators]="false" [singleSlideOffset]="true" [startFromIndex]="0"
-            [interval]="5000">
-            <div class="carousel-inner">
-            <slide *ngFor="let slide of slides; let index=index">
-                <div class="cat-card">
-                <video class="w-100" oncanplay="this.play()" onloadedmetadata="this.muted = true" loop>
-                    <source [src]="slide.image" type="video/mp4"/>
-                </video>
-            </div>
-            </slide>
-        </div>
-        </carousel>
-        <!-- <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="cards-wrapper">
-                        <div class="cat-card">
-                            <video class="w-100" oncanplay="this.play()" onloadedmetadata="this.muted = true">
-                                <source src="./assets/athos-logo-mobile.mp4" type="video/mp4" />
-                            </video>
-                        </div>
-                        <div class="cat-card d-none d-md-block">
-                            <video class="w-100" oncanplay="this.play()" onloadedmetadata="this.muted = true">
-                                <source src="./assets/athos-mobile.mp4" type="video/mp4" />
-                            </video>
 
-                        </div>
-                        <div class=" cat-card d-none d-md-block">
-                            <video class="w-100" oncanplay="this.play()" onloadedmetadata="this.muted = true">
-                                <source src="./assets/athos-logo-mobile.mp4" type="video/mp4" />
-                            </video>
-                        </div>
+    <div class="linear"></div>
+
+    <div class="catalogue" id="Catalogue">
+        <h1 class="primary-font text-center">Catalogue</h1>
+        <carousel [itemsPerSlide]="slide" [showIndicators]="false" [singleSlideOffset]="true" [startFromIndex]="0"
+            [interval]="3000">
+            <div class="carousel-inner">
+                <slide *ngFor="let slide of slides; let index=index">
+                    <div class="cat-card">
+                        <video class="w-100" oncanplay="this.play()" onloadedmetadata="this.muted = true" loop>
+                            <source [src]="slide.image" type="video/mp4" />
+                        </video>
                     </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="cards-wrapper">
-                        <div class="cat-card">
-                            <video class="w-100" oncanplay="this.play()" onloadedmetadata="this.muted = true">
-                                <source src="./assets/athos-mobile.mp4" type="video/mp4" />
-                            </video>
-                        </div>
-                        <div class="cat-card d-none d-md-block">
-                            <video class="w-100" oncanplay="this.play()" onloadedmetadata="this.muted = true">
-                                <source src="./assets/athos-logo-mobile.mp4" type="video/mp4" />
-                            </video>
-                        </div>
-                        <div class="cat-card d-none d-md-block">
-                            <video class="w-100" oncanplay="this.play()" onloadedmetadata="this.muted = true">
-                                <source src="./assets/athos-mobile.mp4" type="video/mp4" />
-                            </video>
-                        </div>
-                    </div>
-                </div>
+                </slide>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              </button>
-       
-        </div> -->
-    </div>
-    <div class="footer" id="ContactUs">
-        <h6>ATHOS INNOVATION SDN.BHD. 202201020251(1465948-D)</h6>
-        <p>No.3, Jalan Mutiara Emas 6/1A,<br>
-            Taman Mount Austin, 81100 Johor Bahru,<br>
-            Johor, Malaysia</p>
-        <a href="mailto:general@athosathlete.com">general@athosathlete.com</a>
-        <div class="social-media pt-3">
-            <a href="https://www.facebook.com/profile.php?id=100083466349340" target="_blank"><img
-                    src="./assets/facebook.png"></a>
-            <a href="https://instagram.com/athos.athlete?igshid=NmNmNjAwNzg=" target="_blank"><img
-                    src="./assets/instagram.png"></a>
-            <a href="https://www.linkedin.com/company/athos-athlete/" target="_blank"><img
-                    src="./assets/linkedin.png"></a>
-            <a href="https://api.whatsapp.com/send?phone=601152224333" target="_blank"><img
-                    src="./assets/whatsapp.png"></a>
-        </div>
+        </carousel>
+
     </div>
 </div>

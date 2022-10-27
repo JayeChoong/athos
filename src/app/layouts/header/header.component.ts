@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-header',
@@ -7,14 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    public pS: ProductService
+  ) { }
 
   ngOnInit(): void {
   }
 
-  goToAbout () {
-    window.open("#AboutUs","_self");
+  getLogin() {
+    if (this.authService.isLogedin) {
+      this.router.navigate(['/profile'])
+    } else {
+      this.router.navigate(['/login'])
+    }
   }
 
-
+  getCart() {
+      this.router.navigate(['/cart'])
+  }
 }

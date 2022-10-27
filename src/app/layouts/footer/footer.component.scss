@@ -1,5 +1,12 @@
 .footer {
-    background: #000000;
+    padding: 3%;
+    text-align: center;
+    background: #000000;        
     color: #ffffff;
-    
+
+    a {
+        cursor: pointer;
+        text-decoration: none;
+        color: #ffffff;
+    }
 }

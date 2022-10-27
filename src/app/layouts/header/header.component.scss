@@ -2,8 +2,21 @@
     height: 5vh;
     align-items: center;
     background: #ffffff;
-    a, span {
+
+    a,
+    span {
         font-size: 20px;
+    }
+
+    img {
+        width: 30px;
+        margin: 0 10px;
+    }
+
+    .badge {
+            font-size: 10px;
+            top: 0;
+            left: 90%
     }
 }
 
@@ -15,10 +28,11 @@
     }
 }
 
-.text-menu{
+.text-menu {
     a {
         font-size: 20px;
     }
+
     transition: all 0.5s ease;
 }
 
@@ -27,7 +41,7 @@
     cursor: pointer;
 }
 
-.text-menu:hover{
+.text-menu:hover {
     letter-spacing: 10px;
     cursor: pointer;
 }

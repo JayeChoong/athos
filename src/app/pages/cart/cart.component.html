@@ -1,0 +1,49 @@
+<div class="content">
+    <div class="row">
+        <div class="col-md-8 cart-listing">
+            <h3>Cart</h3>
+            <div *ngIf="this.pS.cartItem() === 0">
+                No Items
+            </div>
+            <div *ngIf="this.pS.cartItem() !== 0">
+                <ul class="list-group list-group-flush">
+                    <ng-container *ngFor="let cart of this.pS.cartList">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-4">
+                                    <img [src]="cart.product_images[0]" (error)="updateUrl($event, cart)" class="cart-img"
+                                        alt="about-athos">
+                                </div>
+                                <div class="col-8">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <h5 class="card-title">{{cart.title}}</h5>
+                                            <!-- <h6 class="card-subtitle mb-2 text-muted">
+                                                <span *ngFor="let it of catList">
+                                                    {{itm.category === it.id ? it.name : ''}}
+                                                </span>
+                                            </h6> -->
+                                        </div>
+                                        <div class="col-4">
+                                            <p class="card-text text-end">{{cart.price | currency }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ng-container>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4 cart-listing">
+            <h4>Summary</h4>
+            <div class="row">
+                <div class="col-6">Total</div>
+                <div class="col-6 text-end">RM0.00</div>
+            </div>
+            <div class="linear"></div>
+            <button class="btn" (click)="checkout()">CHECKOUT</button>
+        </div>
+    </div>
+  
+</div>

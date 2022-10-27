@@ -11,14 +11,14 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductsComponent implements OnInit {
   isFilter = false;
   isSearch = false;
-  catList: any[] = [];
+  // catList: any[] = th;
   prdList: any[] = [];
   allPrdList: any[] =[];
-  declare searchForm: FormGroup
-
+  declare searchForm: FormGroup;
+  sortList: any[] = [{value:'Newest', id: 1}, {value:'High to Low', id:2}, , {value:'Low to High', id:3}]
 
   constructor(
-    private pS: ProductService,
+    public pS: ProductService,
     private router: Router,
     private fB: FormBuilder
   ) {
@@ -28,8 +28,12 @@ export class ProductsComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.pS.getPrdList(this);
-    this.pS.getCatList(this);
+    this.pS.getPrdList().subscribe((res: any) => {
+      this.prdList = res.results;
+      this.allPrdList = res.results;
+    });
+    // this.pS.getCatList(this);
+
   }
 
   filterPrds(i: any) {
@@ -45,12 +49,13 @@ export class ProductsComponent implements OnInit {
 
   getPrdDtls(itm: any) {
     this.pS.selectedPrd = itm;
+    this.pS.viewList.push(this.pS.selectedPrd);
     this.router.navigate(['/products/product-details'])
   }
 
   updateUrl(evt: any, prd:any) {
     if (evt.type === 'error') {
-      prd.image = "./assets/about.png";
+      prd.product_images[0] = "./assets/about.png";
     }
   }
 
@@ -60,7 +65,11 @@ export class ProductsComponent implements OnInit {
   }
 
   onSelectCat(evt:any) {
-    this.prdList = this.allPrdList.filter(itm => itm.id === evt.id);
+    if (evt.id === 'all') {
+     this.prdList = this.allPrdList;
+    } else {
+      this.prdList = this.allPrdList.filter(itm => itm.category === evt.id);
+    }
   }
 
 }

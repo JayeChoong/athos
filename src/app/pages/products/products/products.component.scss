@@ -7,8 +7,6 @@
     transform: scale(1.05);
 }
 
-
-
 .show-search,
 .show-filter {
     position: relative;
@@ -40,7 +38,7 @@
 
 }
 
-::ng-deep .nav-tabs {
+::ng-deep .tabs .nav-tabs {
     --bs-nav-tabs-link-active-color: #fff;
     --bs-nav-tabs-link-active-bg: #F80789;
     --bs-nav-tabs-link-active-border-color: #f80789;
@@ -52,7 +50,7 @@
     }
 }
 
-::ng-deep .nav {
+::ng-deep .tabs .nav {
     --bs-nav-link-color: #0534F3;
     --bs-nav-link-hover-color: #f80789;
 }

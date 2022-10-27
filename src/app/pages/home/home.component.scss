@@ -2,20 +2,9 @@
     height: 150px;
 }
 
-
 .about-container {
     text-align: center;
-}
-
-.footer {
-    padding-top: 10%;
-    text-align: center;
-
-    a {
-        cursor: pointer;
-        text-decoration: none;
-        color: rgb(33, 37, 41);
-    }
+    padding: 5%
 }
 
 .carousel-container {
@@ -66,34 +55,34 @@
 
 
 .catalogue {
+    text-align: center;
+    padding: 5%;
+
     .carousel-inner {
         width: 90%;
         margin: auto
     }
 
-    // .cards-wrapper {
-    //     display: flex;
-    //     justify-content: center;
-    // }
-
-
-
     .cat-card {
         margin: 1em;
         height: 100%;
-        video{
+
+        video {
             border-radius: 10px;
         }
 
     }
-
-    .carousel-control-prev,
-    .carousel-control-next {
-        background-color: #000000;
-        width: 5vh;
-        height: 5vh;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
 }
+
+::ng-deep .carousel-control-prev,
+::ng-deep .carousel-control-next {
+    width: 5%;
+}
+
+::ng-deep .carousel-control-prev-icon,
+::ng-deep.carousel-control-next-icon {
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: black;
+}
+

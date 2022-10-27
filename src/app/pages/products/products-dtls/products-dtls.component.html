@@ -1,24 +1,108 @@
 <div class="content">
     <div class="row prd-card">
-        <div class="col-6">
-            <img [src]="this.pS.selectedPrd.image" (error)="updateUrl($event)" class="card-img-top" alt="about-athos">
+        <div class="col-md-6 prd-carousel">
+            <img [src]="this.carouselImg" (error)="updateUrl($event)" class="card-img-top" alt="about-athos">
+            <carousel [itemsPerSlide]="5" [singleSlideOffset]="true" [indicatorsByChunk]="true" [interval]="0" [showIndicators]="false">
+                <slide *ngFor="let prd of this.colorList">
+                    <img [src]="prd.image" alt="image slide" (error)="updateUrl($event)" (click)="changeImg(prd.image)">
+                </slide>
+            </carousel>
         </div>
-        <div class="col-6">
+        <div class="col-md-6 prd-dtls">
             <h1 class="card-title">{{this.pS.selectedPrd.title}}</h1>
             <h3 class="card-subtitle mb-2 text-muted">
-                <span *ngFor="let it of catList">
+                <span *ngFor="let it of this.pS.catList">
                     {{this.pS.selectedPrd.category === it.id ? it.name : ''}}
                 </span>
             </h3>
-            <p class="card-text">{{this.pS.selectedPrd.price | currency}}</p>
-            <button class="btn btn-cart">Add To Bag</button>
-            <h4>{{this.pS.selectedPrd.description}}</h4>
+            <h4 class="card-text">{{this.pS.selectedPrd.price | currency}}</h4>
+            <div class="colour-tab">
+                <h5>Colour</h5>
+                <!-- <ul class="navbar-nav">
+                    <ng-container *ngFor="let colour of colorList">
+                        <li class="nav-item" (click)="changeColor(colour)"
+                            [ngClass]="{ 'colour-active': colour.active }">
+                            <img [src]="colour.image">
+                        </li>
+                    </ng-container>
+                </ul> -->
+                <tabset>
+                    <ng-container *ngFor="let color of colorList">
+                        <tab>
+                            <ng-template tabHeading>
+                                <img [src]="color.image">
+                            </ng-template>
+
+                        </tab>
+                    </ng-container>
+                </tabset>
+            </div>
+            <div class="size-tab">
+                <h5>Size</h5>
+                <ul class="navbar-nav">
+                    <ng-container *ngFor="let size of sizeList">
+                        <li class="nav-item cursor" (click)="changeSize(size)"
+                            [ngClass]="{ 'size-active': size.active }">
+                            {{size.name}}</li>
+                    </ng-container>
+                </ul>
+            </div>
+            <div class="btn-cart">
+                <button class="btn" (click)="addCart()">Add To Cart</button>
+            </div>
+            <div class="desc">
+                <h5>Description</h5>
+                <p>{{this.pS.selectedPrd.description}}</p>
+
+            </div>
+
+            <!-- <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Description </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                           {{this.pS.selectedPrd.description}}
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+
         </div>
 
-        <div class="text-center">
-            <h1>Recently View Items</h1>
+        <div *ngIf="this.viewList.length !== 0" class="review-content">
+            <h1 class="text-center">Recently View Items</h1>
+            <carousel [itemsPerSlide]="slide" [showIndicators]="false">
+                <div class="carousel-inner">
+                    <slide *ngFor="let itm of this.viewList">
+                        <div class="card cursor" (click)="getPrdDtls(itm)"> <img [src]="itm.image"
+                                (error)="updateUrl($event, itm)" class="card-img-top" alt="about-athos">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h5 class="card-title">{{itm.title}}</h5>
+                                    </div>
+                                    <div class="col-4">
+                                        <p class="card-text text-end">{{itm.price | currency }}</p>
+                                    </div>
+                                </div>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    <span *ngFor="let it of this.pS.catList">
+                                        {{itm.category === it.id ? it.name : ''}}
+                                    </span>
+                                </h6>
+                            </div>
+                        </div>
+                    </slide>
+                </div>
+            </carousel>
         </div>
-      
+
     </div>
- 
+
 </div>

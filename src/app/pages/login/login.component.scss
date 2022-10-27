@@ -1,0 +1,47 @@
+form {
+    width: 30%;
+    margin: auto;
+
+    @media only screen and (max-width: 1250px) {
+        width: 80%;
+        margin: 10% auto;
+    }
+}
+
+.forgotpwd-section {
+    cursor: pointer;
+    margin-bottom: 5%;
+
+    a {
+        color: black
+    }
+}
+
+.disclaimer {
+    margin-bottom: 5%;
+    font-size: 11px;
+    text-align: center;
+}
+
+.tab-row {
+    width: 50%;
+    margin: 3% auto;
+    text-align: center;
+
+    @media only screen and (max-width: 1250px) {
+        width: 100%;
+    }
+
+    .tab-col {
+        border-bottom: 3px solid grey;
+        color: grey;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .tab-valid {
+        border-bottom: 3px solid black;
+        color: black;
+    }
+}
