@@ -35,4 +35,7 @@ jobs:
       run : mkdir -p ./dist/athos-website
     - name: NPM build Angular Production
       run:  ng build --optimization --aot --output-path=dist/athos-website
-    
+    - uses: rymndhng/release-on-push-action@master
+      with:
+          bump_version_scheme: minor
+          
