@@ -30,7 +30,7 @@ jobs:
     - name: NPM Install Angular
       run: npm install -g @angular/cli > /dev/null
     - name: rm dist folder
-      run : rm -r ./dist
+      run : rm -rf ./dist
     - name: mkdir dist
       run : mkdir -p ./dist/athos-website
     - name: NPM build Angular Production
