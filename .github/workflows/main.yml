@@ -1,0 +1,38 @@
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ develop ]
+jobs:
+  build:
+    # using Ubuntu
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1 #this installs node and npm for us
+      with:
+        node-version: '14.10'
+
+    - uses: actions/cache@v1 # this allows for re-using node_modules caching, making builds a bit faster.
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: NPM Install
+      run: npm install
+    - name: NPM Install Angular
+      run: npm install -g @angular/cli > /dev/null
+    - name: rm dist folder
+      run : rm -rf ./dist
+    - name: mkdir dist
+      run : mkdir -p ./dist/athos-website
+    - name: NPM build Angular Production
+      run:  ng build --optimization --aot --output-path=dist/athos-website
+    
