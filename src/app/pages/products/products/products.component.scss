@@ -55,6 +55,10 @@
     --bs-nav-link-hover-color: #f80789;
 }
 
+.card-img-top {
+border-bottom: 1px solid lightgray;
+}
+
 // .show-search::after:active,
 // .show-filter::after:active{
 //     content: "";
@@ -71,3 +75,17 @@
 //     bottom: -8px;
 //     transition: all 0.4s;
 // }
+
+.size-active {
+    border: 1px solid black;
+}
+
+.nav-item {
+    border: 1px solid lightgray;
+    border-radius: 0.375rem;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

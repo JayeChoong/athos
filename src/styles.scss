@@ -100,10 +100,16 @@ form {
     }
 }
 
-.is-invalid {
-    border-color: red !important;
+// .is-invalid {
+//     border-color: red !important;
+// }
+
+// .invalid-feedback {
+//     color: red;
+// }
+
+.card-title {
+    font-size: 16px;
 }
 
-.invalid-feedback {
-    color: red;
-}
+

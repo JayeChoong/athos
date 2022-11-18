@@ -9,14 +9,14 @@ export const HttpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true },
 ];
 
-export class Api123 {
+export class Api {
   path!: string;
-//   apiKey!: string;
-//   header!:object;
+  //   apiKey!: string;
+  //   header!:object;
 
   constructor() {
     // if (apiConfig) {
-      this.path = environment.path;
+    this.path = environment.path;
     //   this.apiKey = apiConfig.apiKey;
     // }
 
@@ -25,23 +25,23 @@ export class Api123 {
     //  }
   }
 
-  async post(path:string,params:object) {
-     return await axios.post(path, params)
-  }
+  // async post(path: string, params: object) {
+  //   return await axios.post(path, params)
+  // }
 
-  async get(path:string,params:object) {
-    return await axios.post(path, params)
-  } 
+  // async get(path: string, params: object) {
+  //   return await axios.post(path, params)
+  // }
 
-  async put(path:string,params:object) {
-    return await axios.put(path, params)
-  }
+  // async put(path: string, params: object) {
+  //   return await axios.put(path, params)
+  // }
 
-//   static _instance: Api | undefined;
-//   public static get instance() {
-//     if (!this._instance) {
-//       this._instance = new Api(environment.apiConfig);
-//     }
-//     return this._instance;
-//   }
+  //   static _instance: Api | undefined;
+  //   public static get instance() {
+  //     if (!this._instance) {
+  //       this._instance = new Api(environment.apiConfig);
+  //     }
+  //     return this._instance;
+  //   }
 }

@@ -1,31 +1,54 @@
 <div class="content">
-    <div class="row">
-        <div class="col-6">
-            <div>Personal Information</div>
-            <div class="row">
-                <div class="col-4">Email</div>
-                <div class="col-8">{{usrDtls.email}}</div>
-            </div>
-            <div class="row">
-                <div class="col-4">First Name</div>
-                <div class="col-8">{{usrDtls.first_name}}</div>
-            </div>
-            <div class="row">
-                <div class="col-4">Last Name</div>
-                <div class="col-8">{{usrDtls.last_name}}</div>
-            </div>
-            <div class="actionbtn">
-                <button class="btn">EDIT</button>
+    <h1 class="section text-center">Account</h1>
+    <div class="row section-row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="row mb-2 align-items-center">
+                    <div class="col-md-8">Personal Information</div>
+                    <div class="col-md-4">
+                        <button class="btn float-end" (click)="editProfile()">EDIT</button>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-4">Email:</div>
+                    <div class="col-md-8">{{usrDtls?.email}}</div>
+                </div>
+                <div class="row mb-2 ">
+                    <div class="col-md-4">First Name:</div>
+                    <div class="col-md-8">{{usrDtls?.first_name}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Last Name:</div>
+                    <div class="col-md-8">{{usrDtls?.last_name}}</div>
+                </div>
             </div>
         </div>
-        <div class="col-6">
-            <div>Password</div>
-            <div class="actionbtn">
-                <button class="btn" (click)="changePwd()">CHANGE PASSWORD</button>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="row align-items-center">
+                    <div class="col-md-4">Password:</div>
+                    <div class="col-md-8">
+                        <button class="btn" (click)="changePwd()">CHANGE</button>
+                    </div>
+                </div>
             </div>
+            <div class="text-center align-items-center mt-5">
+                <button class="btn" (click)="logout()">LOGOUT</button>
+            </div>
+
         </div>
-        <div class="actionbtn">
-            <button class="btn" (click)="logout()">LOGOUT</button>
+
+    </div>
+    <div class="row section-row mt-3">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="row profile-row align-items-center">
+                    <div class="col-md-8">Address Information</div>
+                    <div class="col-md-4">
+                        <button class="btn float-end" (click)="editAddress()">EDIT</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

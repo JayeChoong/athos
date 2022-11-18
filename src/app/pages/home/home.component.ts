@@ -21,8 +21,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.pS.getCatList();
-
     const video = document.querySelectorAll('video');
     const w = window.innerWidth;
     let myCarousel: any;

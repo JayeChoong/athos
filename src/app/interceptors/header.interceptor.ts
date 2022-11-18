@@ -4,69 +4,50 @@ import {
   HttpHandler,
   HttpEvent,
   HttpClient,
+  HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
-// import { environment } from 'src/environments/environment';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { AuthService } from '../services/auth.service';
+
 
 @Injectable()
-export class HeaderInterceptor{
+export class HeaderInterceptor {
   // baseUrl = environment.path
 
   constructor(
     public http: HttpClient,
+    private authService: AuthService
+  ) { }
 
-  ) {}
-
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authStored = localStorage.getItem('authLogedin') || `{}`;
     const token: string =
       authStored !== '' && Object.keys(JSON.parse(authStored)).length
         ? JSON.parse(authStored).access_token
         : '';
-
     if (token) {
-      return next.handle(
-        request.clone({ setHeaders: { Authorization: `Bearer ${token}` } })
-      );
+      request = request.clone({ setHeaders: { Authorization: `Bearer ${token}` } })
     }
-    return next.handle(request);
+    return next.handle(request)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status == 401) {
+            this.authService.refreshToken().subscribe((res: any) => {
+              if (res.status_code == 200) {
+                console.log('1')
+                const authStored = localStorage.getItem('authLogedin') || `{}`;
+                const data = JSON.parse(authStored);
+                data.access_token = res.info.access;
+                localStorage.setItem('authLogedin', JSON.stringify(data));
+              }
+              return next.handle(request)
+
+            });
+          }
+          return throwError(() => error)
+        })
+      );
   }
-
-  // getHeader(): HttpHeaders {
-  //   const headers = new HttpHeaders({
-  //     'Accept': 'application/json',
-  //     'Content-Type': 'application/json',
-  //     // 'Authorization': this.dS.token,
-  //   });
-  //   return headers;
-  // }
-
-  // get(url: string, params?: any) {
-  //   let reqOpts: any;
-  //     reqOpts = {
-  //       params: new HttpParams(),
-  //       headers: this.getHeader(),
-  //       responseType: 'json'
-  //     };
-  //   if (params) {
-  //     reqOpts.params = new HttpParams();
-  //     for (const k in params) {
-  //       reqOpts.params = reqOpts.params.set(k, params[k]);
-  //     }
-  //   }
-  //   const returnData = this.http.get(url, reqOpts);
-  //   return returnData;
-  // }
-
-  // post(url: string, body: any, reqAuth: boolean) {
-  //   let reqOpts: any;
-  //   if (reqAuth) {
-  //     reqOpts = {
-  //       headers: this.getHeader()
-  //     };
-  //   }
-  //   const returnData = this.http.post(url, body, reqOpts);
-  //   return returnData;
-  // }
 
 }

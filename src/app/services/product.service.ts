@@ -17,20 +17,56 @@ export class ProductService {
     private http: HttpClient
   ) { }
 
-  getPrdList() {
-    return this.http.get(this.path + `/v1/products`);
+  getPrdList(params = {}) {
+    return this.http.get(this.path + `/v1/products/`, { params });
+  }
+
+  getPrdDtls(id: any) {
+    return this.http.get(this.path + `/v1/products/${id}/`);
   }
 
   getCatList() {
-    // if (this.catList.length === 0) {
-    //   const seq = this.api.get(this.api.path + `/v1/category-lists`);
-    //   seq.subscribe((res: any) => {
-    //     this.catList = res.results
-    //   });
-    // }
+    this.http.get(this.path + `/v1/category-lists/`).subscribe((res: any) => {
+      if (res.status_code == 200) {
+        this.catList = res.info.results
+      }
+    });
+  }
+
+  addToCart(cart: any) {
+    console.log(cart);
+    let body = {
+      product: cart.product.id,
+      quantity: cart.quantity,
+      selected_variant: cart.selected_variant.id
+    }
+    return this.http.post(this.path + `/v1/cart/`, body);
+  }
+
+  getCartList() {
+    return this.http.get(this.path + `/v1/cart/`)
+  }
+
+  cartItemUser() {
+    this.http.get(this.path + `/v1/cart/`).subscribe((res: any) => {
+      if (res.status_code == 200) {
+        this.cartList = res.info.results;
+      }
+    });
   }
 
   cartItem() {
     return this.cartList.length;
+  }
+
+  deleteCart(cart: any) {
+    return this.http.delete(this.path + `/v1/cart-item/${cart.id}/`)
+  }
+
+  updateCart(cart: any) {
+    let body = {
+      quantity: cart.quantity,
+    }
+    return this.http.patch(this.path + `/v1/cart-item/${cart.id}/`, body)
   }
 }

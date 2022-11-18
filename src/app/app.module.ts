@@ -9,8 +9,7 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { HomeComponent } from './pages/home/home.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ProductsComponent } from './pages/products/products/products.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HeaderInterceptor } from './interceptors/header.interceptor';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductsDtlsComponent } from './pages/products/products-dtls/products-dtls.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -19,6 +18,10 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { EditProfileComponent } from './pages/profile/edit-profile/edit-profile.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { HttpInterceptorProviders } from './interceptors';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -43,15 +46,21 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    AlertModule
+    AlertModule,
+    BrowserAnimationsModule,
+    BsDropdownModule,
+    ModalModule.forRoot()
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HeaderInterceptor,
-      multi: true
-    },
-    HeaderInterceptor
+    HttpInterceptorProviders
+    
+
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: HeaderInterceptor,
+    //   multi: true
+    // },
+    // HeaderInterceptor
   ],
   bootstrap: [AppComponent]
 })

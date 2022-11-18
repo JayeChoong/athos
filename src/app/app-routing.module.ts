@@ -11,8 +11,6 @@ import { ProfileComponent } from './pages/profile/profile.component';
 HomeComponent
 
 const routes: Routes = [
-  
-   
       {
         path: '',
         component: HomeComponent
@@ -22,7 +20,7 @@ const routes: Routes = [
         component: ProductsComponent
       },
       {
-        path: 'products/product-details',
+        path: 'products/product-details/:id',
         component: ProductsDtlsComponent
       },
       {
@@ -42,12 +40,20 @@ const routes: Routes = [
         component: EditProfileComponent
       },
       {
+        path: 'profile/edit-profile',
+        component: EditProfileComponent
+      },
+      {
         path: 'forgot-password',
         component: ForgotPasswordComponent
       },
       {
         path: 'reset-password/:uid/:token',
         component: ForgotPasswordComponent
+      },
+      {
+        path: 'verify-email/:key',
+        component: LoginComponent
       },
   
 ];

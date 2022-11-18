@@ -17,6 +17,9 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if (this.pS.catList.length == 0) {
+      this.pS.getCatList()
+    }
   }
 
   getLogin() {

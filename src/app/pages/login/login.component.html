@@ -1,124 +1,143 @@
-<div class="content">
-    <alert [type]="msgType" *ngIf="isAlert">{{msg}}</alert>
-    <div class="row tab-row">
-        <div class="col-6 cursor tab-col" [ngClass]="{ 'tab-valid': isLogin }" (click)="changeTab(true)" x>LOGIN</div>
-        <div class="col-6 cursor tab-col" [ngClass]="{ 'tab-valid': !isLogin }" (click)="changeTab(false)">CREATE
-            ACCOUNT
+<div class="content" *ngIf="this.router.url === '/login'">
+    <ng-container *ngIf="!isSuccess">
+        <alert class="tab-row" [type]="msgType" *ngIf="isAlert" [dismissible]="true">{{msg}}</alert>
+        <div class="row tab-row">
+            <div class="col-6 cursor tab-col" [ngClass]="{ 'tab-valid': isLogin }" (click)="changeTab(true)" x>LOGIN
+            </div>
+            <div class="col-6 cursor tab-col" [ngClass]="{ 'tab-valid': !isLogin }" (click)="changeTab(false)">CREATE
+                ACCOUNT
+            </div>
         </div>
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()" *ngIf="isLogin">
+            <div class="form-group">
+                <input type="email" formControlName="email" class="form-control required" placeholder="Email Address"
+                    autocomplete="off"
+                    [ngClass]="{ 'is-invalid':  (loginError.email.touched || isSubmitLogin) &&loginError.email.errors }" />
+                <div *ngIf="loginError.email.touched && loginError.email.errors" class="invalid-feedback">
+                    <div *ngIf="loginError.email.errors?.required">
+                        Email Address is required
+                    </div>
+                    <div *ngIf="loginError.email.errors?.pattern">
+                        Enter a valid email address
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="password" formControlName="password" class="form-control required" placeholder="Password"
+                    [ngClass]="{'is-invalid': (loginError.password.touched || isSubmitLogin) && loginError.password.errors}" />
+                <div *ngIf="loginError.password.touched && loginError.password.errors" class="invalid-feedback">
+                    <div *ngIf="loginError.password.errors?.required">
+                        Password is required
+                    </div>
+                </div>
+            </div>
+
+            <div class="forgotpwd-section text-end">
+                <a [routerLink]="['/forgot-password']">Forgot password</a>
+            </div>
+            <div class="actionbtn">
+                <button class="btn">LOG IN</button>
+            </div>
+
+        </form>
+
+
+        <form [formGroup]="registerForm" (ngSubmit)="onRegister()" *ngIf="!isLogin">
+            <div class="form-group">
+                <input type="email" formControlName="email" class="form-control required" placeholder="Email Address"
+                    [ngClass]="{ 'is-invalid': (registerError.email.touched || isSubmitRegister) && registerError.email.errors}" />
+                <div *ngIf="registerError.email.touched && registerError.email.errors" class="invalid-feedback">
+                    <div *ngIf="registerError.email.errors?.required">
+                        Email Address is required
+                    </div>
+                    <div *ngIf="registerError.email.errors?.pattern">
+                        Enter a valid email address
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="password" formControlName="password1" class="form-control required" placeholder="Password"
+                    [ngClass]="{'is-invalid': (registerError.password1.touched || isSubmitRegister) && registerError.password1.errors}" />
+                <div *ngIf="registerError.password1.touched && registerError.password1.errors" class="invalid-feedback">
+                    <div *ngIf="registerError.password1.errors?.required">
+                        Password is required
+                    </div>
+                    <div *ngIf="registerError.password1.errors?.minlength">
+                        Password must be at least 8 characters
+                    </div>
+                    <div *ngIf="registerError.password1.errors?.hasCapitalCase">
+                        Password must contain at least one upper case character
+                    </div>
+                    <div *ngIf="registerError.password1.errors?.hasSmallCase">
+                        Password must contain at least one lower case character
+                    </div>
+                    <div *ngIf="registerError.password1.errors?.hasNumber">
+                        Password must contain at least one numeric character
+                    </div>
+                    <div *ngIf="registerError.password1.errors?.hasSpecialCharacters">
+                        Password must contain at least one special character
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="password" formControlName="password2" class="form-control required"
+                    placeholder="Confirm Password"
+                    [ngClass]="{'is-invalid': (registerError.password2.touched || isSubmitRegister) && registerError.password2.errors}" />
+                <div *ngIf="registerError.password2.touched && registerError.password2.errors" class="invalid-feedback">
+                    <div *ngIf="registerError.password2.errors?.required">
+                        Password is required
+                    </div>
+                    <div *ngIf="registerError.password2.errors?.NoPassswordMatch">
+                        Password is not matched
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" formControlName="first_name" class="form-control required" placeholder="First Name"
+                    [ngClass]="{'is-invalid': (registerError.first_name.touched || isSubmitRegister) && registerError.first_name.errors}" />
+                <div *ngIf="registerError.first_name.touched && registerError.first_name.errors"
+                    class="invalid-feedback">
+                    <div *ngIf="registerError.first_name.errors?.required">
+                        First Name is required
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" formControlName="last_name" class="form-control required" placeholder="Last Name"
+                    [ngClass]="{'is-invalid': (registerError.last_name.touched || isSubmitRegister) && registerError.last_name.errors}" />
+                <div *ngIf="registerError.last_name.touched && registerError.last_name.errors" class="invalid-feedback">
+                    <div *ngIf="registerError.last_name.errors?.required">
+                        Last Name is required
+                    </div>
+                </div>
+            </div>
+            <div class="disclaimer">
+                <span class="text-muted">By creating an account, you agree to our Privacy Policy and Terms of
+                    Use.</span>
+            </div>
+
+            <div class="actionbtn">
+                <button class="btn">CREATE ACCOUNT</button>
+            </div>
+
+        </form>
+
+    </ng-container>
+    <ng-container *ngIf="isSuccess">
+        <div class="success-msg">
+            <h1>Verify Your Email!</h1>
+            <p>A verification link has been sent to your email. Please check your email to verify your account</p>
+        </div>
+    </ng-container>
+</div>
+
+<div class="content" *ngIf="this.router.url !== '/login'">
+    <div class="success-msg">
+        <h1>Verified!</h1>
+        <p>You have successfully verified your account. You can now login!</p>
+        <button class="btn" routerLink="/login">LOGIN NOW!</button>
     </div>
-    <form [formGroup]="loginForm" (ngSubmit)="onLogin()" *ngIf="isLogin">
-        <div class="form-group">
-            <input type="email" formControlName="email" class="form-control required" placeholder="Email Address"
-                autocomplete="off" [ngClass]="{ 'is-invalid':  (loginError.email.touched || isSubmitLogin) &&loginError.email.errors }" />
-            <div *ngIf="loginError.email.touched && loginError.email.errors" class="invalid-feedback">
-                <div *ngIf="loginError.email.errors?.required">
-                    Email Address is required
-                </div>
-                <div *ngIf="loginError.email.errors?.pattern">
-                    Enter a valid email address
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <input type="password" formControlName="password" class="form-control required" placeholder="Password"
-                [ngClass]="{'is-invalid': (loginError.password.touched || isSubmitLogin) && loginError.password.errors}" />
-            <div *ngIf="loginError.password.touched && loginError.password.errors" class="invalid-feedback">
-                <div *ngIf="loginError.password.errors?.required">
-                    Password is required
-                </div>
-            </div>
-        </div>
-
-        <div class="forgotpwd-section text-end">
-            <a [routerLink]="['/forgot-password']">Forgot password</a>
-        </div>
-        <div class="actionbtn">
-            <button class="btn">LOG IN</button>
-        </div>
-
-    </form>
-
-
-    <form [formGroup]="registerForm" (ngSubmit)="onRegister()" *ngIf="!isLogin">
-        <div class="form-group">
-            <input type="email" formControlName="email" class="form-control required" placeholder="Email Address"
-                [ngClass]="{ 'is-invalid': (registerError.email.touched || isSubmitRegister) && registerError.email.errors}" />
-            <div *ngIf="registerError.email.touched && registerError.email.errors" class="invalid-feedback">
-                <div *ngIf="registerError.email.errors?.required">
-                    Email Address is required
-                </div>
-                <div *ngIf="registerError.email.errors?.pattern">
-                    Enter a valid email address
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <input type="password" formControlName="password1" class="form-control required" placeholder="Password"
-                [ngClass]="{'is-invalid': (registerError.password1.touched || isSubmitRegister) && registerError.password1.errors}"/>
-            <div *ngIf="registerError.password1.touched && registerError.password1.errors" class="invalid-feedback">
-                <div *ngIf="registerError.password1.errors?.required">
-                    Password is required
-                </div>
-                <div *ngIf="registerError.password1.errors?.minlength">
-                    Password must be at least 8 characters
-                  </div>
-                <div *ngIf="registerError.password1.errors?.hasCapitalCase">
-                    Password must contain at least one upper case character
-                </div>
-                <div *ngIf="registerError.password1.errors?.hasSmallCase">
-                    Password must contain at least one lower case character
-                </div>
-                <div *ngIf="registerError.password1.errors?.hasNumber">
-                    Password must contain at least one numeric character
-                </div>
-                <div *ngIf="registerError.password1.errors?.hasSpecialCharacters">
-                    Password must contain at least one special character
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <input type="password" formControlName="password2" class="form-control required" placeholder="Confirm Password"
-                [ngClass]="{'is-invalid': (registerError.password2.touched || isSubmitRegister) && registerError.password2.errors}" />
-            <div *ngIf="registerError.password2.touched && registerError.password2.errors" class="invalid-feedback">
-                <div *ngIf="registerError.password2.errors?.required">
-                    Password is required
-                </div>
-                <div *ngIf="registerError.password2.errors?.NoPassswordMatch">
-                    Password is not matched
-                </div>
-              
-            </div>
-        </div>
-        <div class="form-group">
-            <input type="text" formControlName="first_name" class="form-control required" placeholder="First Name"
-                [ngClass]="{'is-invalid': (registerError.first_name.touched || isSubmitRegister) && registerError.first_name.errors}" />
-            <div *ngIf="registerError.first_name.touched && registerError.first_name.errors"
-                class="invalid-feedback">
-                <div *ngIf="registerError.first_name.errors?.required">
-                    First Name is required
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <input type="text" formControlName="last_name" class="form-control required" placeholder="Last Name"
-                [ngClass]="{'is-invalid': (registerError.last_name.touched || isSubmitRegister) && registerError.last_name.errors}"  />
-            <div *ngIf="registerError.last_name.touched && registerError.last_name.errors" class="invalid-feedback">
-                <div *ngIf="registerError.last_name.errors?.required">
-                    Last Name is required
-                </div>
-            </div>
-        </div>
-        <div class="disclaimer">
-            <span class="text-muted">By creating an account, you agree to our Privacy Policy and Terms of Use.</span>
-        </div>
-
-        <div class="actionbtn">
-            <button class="btn">CREATE ACCOUNT</button>
-        </div>
-
-    </form>
-
-
 </div>

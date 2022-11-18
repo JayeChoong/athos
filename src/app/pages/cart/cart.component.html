@@ -2,30 +2,35 @@
     <div class="row">
         <div class="col-md-8 cart-listing">
             <h3>Cart</h3>
-            <div *ngIf="this.pS.cartItem() === 0">
+            <div *ngIf="this.pS.cartItem() == 0">
                 No Items
             </div>
-            <div *ngIf="this.pS.cartItem() !== 0">
+            <div *ngIf="this.pS.cartItem() != 0">
                 <ul class="list-group list-group-flush">
-                    <ng-container *ngFor="let cart of this.pS.cartList">
+                    <ng-container *ngFor="let cart of this.cartList">
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col-4">
-                                    <img [src]="cart.product_images[0]" (error)="updateUrl($event, cart)" class="cart-img"
-                                        alt="about-athos">
+                                    <img [src]="cart.selected_variant.product_variant_images[0]"
+                                        (error)="updateUrl($event, cart)" class="cart-img" alt="about-athos">
                                 </div>
                                 <div class="col-8">
                                     <div class="row">
-                                        <div class="col-8">
-                                            <h5 class="card-title">{{cart.title}}</h5>
-                                            <!-- <h6 class="card-subtitle mb-2 text-muted">
-                                                <span *ngFor="let it of catList">
-                                                    {{itm.category === it.id ? it.name : ''}}
-                                                </span>
-                                            </h6> -->
+                                        <div class="col-md-8">
+                                            <div class="card-title mb-2 ">{{cart.product.title}}</div>
+                                            <div class="card-title mb-2 ">Color: {{cart.selected_variant.COLOR}}</div>
+                                            <div class="card-title mb-2 ">Size: {{cart.selected_variant.SIZE}}</div>
+                                            <div class="mb-2 ">Quantity: <input type="number"
+                                                    [value]="cart.quantity" class="form-control"
+                                                    min="1" (change)="updateTotal($event, cart)"></div>
+
                                         </div>
-                                        <div class="col-4">
-                                            <p class="card-text text-end">{{cart.price | currency }}</p>
+                                        <div class="col-md-4">
+                                            <p class="card-text text-end float-start">{{ getEachTotal(cart) | currency:
+                                                'MYR '}}</p>
+                                            <a (click)="deletePrd(cart)" class="cursor float-end"><img
+                                                    src="./assets/icons/remove.png"></a>
+
                                         </div>
                                     </div>
                                 </div>
@@ -39,11 +44,11 @@
             <h4>Summary</h4>
             <div class="row">
                 <div class="col-6">Total</div>
-                <div class="col-6 text-end">RM0.00</div>
+                <div class="col-6 text-end">{{ getTotal() | currency: 'MYR '}}</div>
             </div>
             <div class="linear"></div>
             <button class="btn" (click)="checkout()">CHECKOUT</button>
         </div>
     </div>
-  
+
 </div>

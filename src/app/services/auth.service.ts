@@ -9,6 +9,7 @@ import { HeaderInterceptor } from '../interceptors/header.interceptor';
 })
 export class AuthService {
   path = environment.path;
+  usrDtls: any;
 
   constructor(
     private http: HttpClient
@@ -78,4 +79,36 @@ export class AuthService {
     return this.http.post(this.path + `/rest-auth/password/reset/confirm/`, body)
   }
 
+
+  verifyEmail(key: any) {
+    const body = {
+      key: key,
+    }
+    return this.http.post(this.path + `/rest-auth/verify-email/`, body)
+
+  }
+
+
+  // refreshToken() {
+  //   const authStored = localStorage.getItem('authLogedin') || `{}`;
+  //   const data = JSON.parse(authStored);
+  //   this.http.post(this.path + `/rest-auth/token/refresh/`, { refresh: data.refresh_token }).subscribe((res: any) => {
+  //     data.access_token = res.info.access;
+  //     localStorage.setItem('authLogedin', JSON.stringify(data));
+  //   });
+
+  refreshToken() {
+    const authStored = localStorage.getItem('authLogedin') || `{}`;
+    const data = JSON.parse(authStored);
+    return this.http.post(this.path + `/rest-auth/token/refresh/`, { refresh: data.refresh_token })
+
+    // const authStored = localStorage.getItem('authLogedin') || `{}`;
+    // const data = JSON.parse(authStored);
+    this.http.post(this.path + `/rest-auth/token/refresh/`, { refresh: data.refresh_token }).subscribe((res: any) => {
+      data.access_token = res.info.access;
+      localStorage.setItem('authLogedin', JSON.stringify(data));
+    });
+
+
+  }
 }

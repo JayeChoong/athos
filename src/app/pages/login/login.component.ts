@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/class/custom-validators';
 import { AuthService } from 'src/app/services/auth.service';
-import { Router } from '@angular/router';
-
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   declare registerForm: FormGroup;
   declare loginForm: FormGroup;
-
   // isChecked = false;
   isSubmitLogin = false;
   isSubmitRegister = false
@@ -21,11 +20,14 @@ export class LoginComponent implements OnInit {
   msg: any;
   msgType: any;
   isAlert = false;
+  isSuccess = false;
 
   constructor(
     private fB: FormBuilder,
     private aS: AuthService,
-    private router: Router,
+    public router: Router,
+    private route: ActivatedRoute,
+    private pS: ProductService
   ) {
     this.loginForm = this.fB.group({
       email: [null, [Validators.required, Validators.pattern("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")]],
@@ -53,7 +55,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    if (this.router.url !== '/login') {
+      this.route.params.subscribe(params => this.onVerify(params['key']));
+    }
   }
 
   get loginError() {
@@ -64,13 +68,29 @@ export class LoginComponent implements OnInit {
     return this.registerForm.controls;
   }
 
+  onVerify(key: string) {
+    this.aS.verifyEmail(key).subscribe((res: any) => {
+    });
+  }
+
   onLogin() {
     this.isSubmitLogin = true;
     const loginValue = this.loginForm.value;
-    this.aS.login(loginValue).subscribe((res: any) => {
-      localStorage.setItem('authLogedin', JSON.stringify(res));
-      this.router.navigate([''])
-    });
+    this.aS.login(loginValue).subscribe({
+      next: (res: any) => {
+        if (res.status_code == 200) {
+          localStorage.setItem('authLogedin', JSON.stringify(res.info));
+          this.router.navigate(['']);
+          this.pS.cartItemUser()
+        }
+      },
+      error: (err: any) => {
+        this.msg = err.error.message;
+        this.msgType = 'danger';
+        this.isAlert = true;
+      }
+    }
+    );
 
   }
 
@@ -82,13 +102,16 @@ export class LoginComponent implements OnInit {
     this.isSubmitRegister = true;
     const registerValue = this.registerForm.value;
     this.aS.registerAccount(registerValue).subscribe((res: any) => {
-      if (res.access_token) {
-        localStorage.setItem('authLogedin', JSON.stringify(res));
-        this.router.navigate([''])
+
+      if (res.status_code == 201) {
+        this.isSuccess = true;
+        // localStorage.setItem('authLogedin', JSON.stringify(res.info));
+        // this.router.navigate([''])
       } else {
         this.msgType = 'danger';
-        this.msg = res.non_field_errors[0];
+        this.msg = 'asdasdasdas';
         this.isAlert = true;
+
       }
     });
   }
