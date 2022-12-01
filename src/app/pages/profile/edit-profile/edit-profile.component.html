@@ -40,9 +40,13 @@
 
                 </div>
             </div>
-            <div class="actionbtn">
-                <button class="btn" (click)="onChangePwd()">UPDATE PASSWORD</button>
-                <button class="btn mt-3" (click)="back()">CANCEL</button>
+            <div class="row">
+                <div class="col-6 actionbtn">
+                    <button class="btn" (click)="back()">CANCEL</button>
+                </div>
+                <div class="col-6 actionbtn">
+                    <button class="btn" (click)="onChangePwd()">UPDATE</button>
+                </div>
             </div>
         </form>
     </div>
@@ -52,12 +56,24 @@
             <div class="form-group">
                 <input readonly class="form-control" type="text" name="email" formControlName="email">
             </div>
-      
+            <div class="form-group">
+                <input type="text" formControlName="phone_number" class="form-control required" placeholder="Phone No"
+                    [ngClass]="{'is-invalid': (updateError.phone_number.touched || isSubmitUpdate) && updateError.phone_number.errors}" />
+                <div *ngIf="updateError.phone_number.touched && updateError.phone_number.errors"
+                    class="invalid-feedback">
+                    <div *ngIf="updateError.phone_number.errors?.required">
+                        Phone Number is required
+                    </div>
+                    <div *ngIf="updateError.phone_number.errors?.pattern">
+                        Please enter a valid Phone Number
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group">
                 <input type="text" formControlName="first_name" class="form-control required" placeholder="First Name"
                     [ngClass]="{'is-invalid': (updateError.first_name.touched || isSubmitUpdate) && updateError.first_name.errors}" />
-                <div *ngIf="updateError.first_name.touched && updateError.first_name.errors"
-                    class="invalid-feedback">
+                <div *ngIf="updateError.first_name.touched && updateError.first_name.errors" class="invalid-feedback">
                     <div *ngIf="updateError.first_name.errors?.required">
                         First Name is required
                     </div>
@@ -65,17 +81,41 @@
             </div>
             <div class="form-group">
                 <input type="text" formControlName="last_name" class="form-control required" placeholder="Last Name"
-                    [ngClass]="{'is-invalid': (updateError.last_name.touched || isSubmitUpdate) && updateError.last_name.errors}"  />
+                    [ngClass]="{'is-invalid': (updateError.last_name.touched || isSubmitUpdate) && updateError.last_name.errors}" />
                 <div *ngIf="updateError.last_name.touched && updateError.last_name.errors" class="invalid-feedback">
                     <div *ngIf="updateError.last_name.errors?.required">
                         Last Name is required
                     </div>
                 </div>
             </div>
-    
-            <div class="actionbtn">
-                <button class="btn" (click)="onUpdate()">UPDATE PROFILE</button>
-                <button class="btn mt-3" (click)="back()">CANCEL</button>
+            <div class="form-group">
+                <textarea class="form-control" formControlName="home_address" rows="3" placeholder="Home Address"
+                    [ngClass]="{'is-invalid': (updateError.home_address.touched || isSubmitUpdate) && updateError.home_address.errors}"></textarea>
+                <div *ngIf="updateError.home_address.touched && updateError.home_address.errors"
+                    class="invalid-feedback">
+                    <div *ngIf="updateError.home_address.errors?.required">
+                        Last Name is required
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" formControlName="delivery_address" rows="3"
+                    placeholder="Delivery Address"
+                    [ngClass]="{'is-invalid': (updateError.delivery_address.touched || isSubmitUpdate) && updateError.delivery_address.errors}"></textarea>
+                <div *ngIf="updateError.delivery_address.touched && updateError.delivery_address.errors"
+                    class="invalid-feedback">
+                    <div *ngIf="updateError.delivery_address.errors?.required">
+                        Last Name is required
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 actionbtn">
+                    <button class="btn" (click)="back()">CANCEL</button>
+                </div>
+                <div class="col-6 actionbtn">
+                    <button class="btn" (click)="onUpdate()">UPDATE</button>
+                </div>
             </div>
         </form>
     </div>

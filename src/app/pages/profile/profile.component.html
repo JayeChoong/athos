@@ -17,9 +17,21 @@
                     <div class="col-md-4">First Name:</div>
                     <div class="col-md-8">{{usrDtls?.first_name}}</div>
                 </div>
-                <div class="row">
+                <div class="row mb-2">
                     <div class="col-md-4">Last Name:</div>
                     <div class="col-md-8">{{usrDtls?.last_name}}</div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-4">Phone No:</div>
+                    <div class="col-md-8">{{usrDtls?.phone_number}}</div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-4">Home:</div>
+                    <div class="col-md-8">{{usrDtls?.home_address}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Delivery:</div>
+                    <div class="col-md-8">{{usrDtls?.delivery_address}}</div>
                 </div>
             </div>
         </div>
@@ -27,7 +39,7 @@
             <div class="card">
                 <div class="row align-items-center">
                     <div class="col-md-4">Password:</div>
-                    <div class="col-md-8">
+                    <div class="col-md-8 float-end">
                         <button class="btn" (click)="changePwd()">CHANGE</button>
                     </div>
                 </div>
@@ -39,7 +51,7 @@
         </div>
 
     </div>
-    <div class="row section-row mt-3">
+    <!-- <div class="row section-row mt-3">
         <div class="col-md-6">
             <div class="card">
                 <div class="row profile-row align-items-center">
@@ -48,7 +60,15 @@
                         <button class="btn float-end" (click)="editAddress()">EDIT</button>
                     </div>
                 </div>
+                <div class="row mb-2">
+                    <div class="col-md-4">Home:</div>
+                    <div class="col-md-8">{{usrDtls?.home_address}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Delivery:</div>
+                    <div class="col-md-8">{{usrDtls?.delivery_address}}</div>
+                </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>

@@ -1,6 +1,6 @@
 .section {
     width: 50%;
-    margin: 3% auto 1%;
+    margin: 0 auto 2%;
     text-align: center;
 
     @media only screen and (max-width: 1250px) {
@@ -14,5 +14,9 @@ form {
     @media only screen and (max-width: 1250px) {
         width: 80%;
         margin: 10% auto;
+    }
+
+    textarea {
+        height: auto;
     }
 }

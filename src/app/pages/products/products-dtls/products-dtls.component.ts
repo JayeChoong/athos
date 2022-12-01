@@ -24,6 +24,7 @@ export class ProductsDtlsComponent implements OnInit {
   path = environment.base;
   selectedColor: any;
   selectedSize: any;
+  selectedPrice: any;
   isSelected = false;
   carouselList: any[] = [];
   isNew = true;
@@ -33,7 +34,7 @@ export class ProductsDtlsComponent implements OnInit {
     public pS: ProductService,
     private router: Router,
     private route: ActivatedRoute,
-    private aS: AuthService,
+    public aS: AuthService,
     private modalService: BsModalService
   ) {
     this.catList = this.pS.catList;
@@ -51,11 +52,8 @@ export class ProductsDtlsComponent implements OnInit {
     this.pS.getPrdDtls(this.prdId).subscribe(async (res: any) => {
       if (res.status_code == 200) {
         this.prdDtls = await res.info;
-        this.carouselImg = await this.path + this.prdDtls.product_variants[0].product_variant_images[0];
-        for (const it of this.prdDtls.product_variants[0].product_variant_images) {
-          const img = await this.path + it;
-          this.carouselList.push(img);
-        }
+        this.carouselImg = this.prdDtls.product_variants[0].product_variant_images[0];
+        this.carouselList = this.prdDtls.product_variants[0].product_variant_images
         this.pS.selectedPrd = this.prdDtls;
         let isExist = false;
         for (const view of this.pS.viewList) {
@@ -78,14 +76,13 @@ export class ProductsDtlsComponent implements OnInit {
         variant[item['name']] = item['value'];
       });
       itm = Object.assign(itm, variant);
-      itm.images = [];
-      for (const it of itm.product_variant_images) {
-        const img = this.path + it;
-        itm.images.push(img);
-      }
-      this.colorList.push({ color: itm.COLOR, product_variant_images: itm.images });
+      this.colorList.push({
+        color: itm.COLOR, product_variant_images: itm.product_variant_images,
+        price: itm.price
+      });
     });
     this.selectedColor = this.colorList[0].color;
+    this.selectedPrice = this.colorList[0].price;
     this.colorList = [... new Map(this.colorList.map((a) => [a.color, a])).values()];
     this.patchSize();
   }
@@ -93,7 +90,7 @@ export class ProductsDtlsComponent implements OnInit {
   patchSize() {
     this.prdDtls.product_variants.forEach((itm: any) => {
       this.colorList.forEach((obj: any) => {
-        if (itm.COLOR === obj.color) {
+        if (itm.COLOR == obj.color) {
           if (obj.variants) {
             obj.variants.push({ id: itm.id, size: itm.SIZE, qty: itm.quantity });
           } else {
@@ -115,23 +112,11 @@ export class ProductsDtlsComponent implements OnInit {
     })
   }
 
-  updateUrl(evt: any, itm?: any) {
-    console.log(itm);
-    if (evt.type === 'error') {
-      if (itm) {
-        itm.product_images[0] = this.path + itm.product_images[0];
-      } else {
-        this.prdDtls.product_images[0] = this.path + this.prdDtls.product_images[0];
-      }
-    }
-  }
-
   addCart() {
     if (!this.selectedSize || !this.selectedColor) {
       this.isSelected = false;
       this.isNew = false;
     } else {
-      
       let product = {
         id: Number(this.prdId),
         title: this.prdDtls.title,
@@ -142,7 +127,7 @@ export class ProductsDtlsComponent implements OnInit {
         SIZE: this.selectedSize.name,
         product_variant_images: this.carouselList,
         id: this.selectedSize.id,
-        price: Number(this.prdDtls.price),
+        price: Number(this.selectedPrice),
       }
 
       let cart = {
@@ -155,10 +140,12 @@ export class ProductsDtlsComponent implements OnInit {
         this.pS.addToCart(cart).subscribe((res: any) => {
           if (res.status_code == 201) {
             this.pushToCart(cart);
+          } else if (res.status_code == 406) {
+            this.pS.updateCart(cart);
           }
         });
       } else {
-      this.pushToCart(cart);
+        this.pushToCart(cart);
       }
     }
   }
@@ -200,6 +187,7 @@ export class ProductsDtlsComponent implements OnInit {
     this.carouselImg = itm.product_variant_images[0];
     this.carouselList = itm.product_variant_images;
     this.selectedColor = itm.color;
+    this.selectedPrice = itm.price
     this.sizeList.map(it => it.active = false);
     this.selectedSize = null;
     this.isSelected = false;
@@ -207,7 +195,7 @@ export class ProductsDtlsComponent implements OnInit {
   }
 
   openModal(content: any) {
-    this.modalRef = this.modalService.show(content, 
+    this.modalRef = this.modalService.show(content,
       Object.assign({}, { class: 'modal-lg' }));
   }
 

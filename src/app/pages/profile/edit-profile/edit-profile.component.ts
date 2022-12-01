@@ -37,12 +37,13 @@ export class EditProfileComponent implements OnInit {
     );
 
     this.updateForm = this.fB.group({
-      first_name: [null],
-      last_name: [null],
+      first_name: [this.aS.usrDtls.first_name],
+      last_name: [this.aS.usrDtls.last_name],
       email: [this.aS.usrDtls.email],
+      phone_number: [this.aS.usrDtls.phone_number, [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+      home_address: [this.aS.usrDtls.home_address],
+      delivery_address: [this.aS.usrDtls.delivery_address]
     });
-    // this.updateForm.get('email')?.setValue(this.aS.usrDtls.email);
-
   }
 
   ngOnInit(): void {
@@ -61,7 +62,9 @@ export class EditProfileComponent implements OnInit {
     const pwdValue = this.pwdForm.value;
     this.aS.changePwd(pwdValue).subscribe((res: any) => {
       // localStorage.setItem('authLogedin', JSON.stringify(res));
-      // this.router.navigate(['/profile'])
+      if (res.status_code == 200) {
+        this.router.navigate(['/profile'])
+      }
     });
 
   }
@@ -71,12 +74,14 @@ export class EditProfileComponent implements OnInit {
     const updateValue = this.updateForm.value;
     this.aS.updateUsrDtls(updateValue).subscribe((res: any) => {
       // localStorage.setItem('authLogedin', JSON.stringify(res));
-      // this.router.navigate(['/profile'])
+      if (res.status_code == 200) {
+        this.router.navigate(['/profile'])
+      }
     });
   }
 
   back() {
-      this.router.navigate(['/profile'])
+    this.router.navigate(['/profile'])
   }
 
 }

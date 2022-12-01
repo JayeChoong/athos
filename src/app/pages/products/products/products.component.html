@@ -1,56 +1,115 @@
 <div class="content">
-    <div class="row py-2">
+    <div class="row">
         <div class="col-md-10 col-sm-6">
-            <!-- <div class="btn-group" dropdown [autoClose]="false">
-                <button id="button-basic" dropdownToggle type="button" class="btn"
-                    aria-controls="dropdown-basic">Size<span class="caret"></span>
+            <div class="btn-group filter-group" dropdown [insideClick]="true">
+                <button dropdownToggle type="button" class="btn filter-button dropdown-toggle">Color<span
+                        class="caret"></span>
                 </button>
-                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-                    <div role="menuitem" *ngFor="let size of sizeList">
-                        <span class="nav-item cursor" (click)="changeSize(size)"
-                            [ngClass]="{ 'size-active': size.active }">
-                            {{size.name}}</span>
+                <div *dropdownMenu class="dropdown-menu" role="menu">
+                    <ul class="navbar-nav">
+                        <ng-container *ngFor="let color of colorList">
+                            <li class="nav-item">
+                                <input type="checkbox" [checked]="color.isActive"
+                                    (change)="changeFilter(color, 'CL')" />
+                                <label class="form-check-label">
+                                    {{color.name}} </label>
+                            </li>
+                        </ng-container>
+                    </ul>
+                </div>
+            </div>
+            <div class="btn-group filter-group" dropdown [insideClick]="true">
+                <button dropdownToggle type="button" class="btn filter-button dropdown-toggle">Size<span
+                        class="caret"></span>
+                </button>
+                <div *dropdownMenu class="dropdown-menu" role="menu">
+                    <div class="row">
+                        <ng-container *ngFor="let size of sizeList">
+                            <div class="col-4">
+                                <button (click)="changeFilter(size, 'S')" class="btn filter-item"
+                                    [ngClass]="{ 'filter-active': size.isActive}"> {{size.name}}</button>
+                            </div>
+                        </ng-container>
                     </div>
-                </ul>
-            </div> -->
+                </div>
+            </div>
+
+            <div class="btn-group filter-group" dropdown [insideClick]="true">
+                <button dropdownToggle type="button" class="btn filter-button dropdown-toggle">Category<span
+                        class="caret"></span>
+                </button>
+                <div *dropdownMenu class="dropdown-menu" role="menu">
+                    <ul class="navbar-nav">
+                        <ng-container *ngFor="let cat of catList">
+                            <li class="nav-item">
+                                <input type="checkbox" [checked]="cat.isActive" (change)="changeFilter(cat, 'CT')" />
+                                <label class="form-check-label">
+                                    {{cat.name}} </label>
+                            </li>
+                        </ng-container>
+                    </ul>
+                </div>
+            </div>
+            <div class="btn-group filter-group" dropdown [insideClick]="true">
+                <button dropdownToggle type="button" class="btn filter-button dropdown-toggle">Price<span
+                        class="caret"></span>
+                </button>
+                <div *dropdownMenu class="dropdown-menu" role="menu">
+                    <ul class="navbar-nav">
+                        <ng-container *ngFor="let price of priceList">
+                            <li class="nav-item">
+                                <input type="checkbox" [checked]="price.isActive"
+                                    (change)="changePrice($event.target,price)">
+                                <label class="form-check-label">
+                                    {{price.name}} </label>
+                            </li>
+                        </ng-container>
+                    </ul>
+                </div>
+            </div>
+            <div class="btn-group filter-group">
+                <form [formGroup]="searchForm">
+                    <input class="form-control" type="text" (keyup.enter)="searchPrd()" placeholder="Search"
+                        formControlName="keyword">
+                </form>
+            </div>
 
         </div>
         <div class="col-md-2 col-sm-6  text-end">
-            <!-- <button type="button" class="btn show-search" [ngClass]="{'show-search-active': isSearch }"
-                (click)="filterPrds('S')">Search</button> -->
             <select class="form-control form-select" (change)="onSelectSort($event.target)">
                 <option [value]="-1" selected>Sort By</option>
                 <option *ngFor="let x of sortList" [value]="x.id">
                     {{ x.value }}
                 </option>
             </select>
-
         </div>
-        <!-- <div *ngIf="isSearch" class="py-3">
-            <form [formGroup]="searchForm">
-                <input class="form-control" type="text" (keyup.enter)="searchPrd($event)" placeholder="Search"
-                    formControlName="keyword">
-            </form>
-        </div> -->
     </div>
-    <div>
-        <div class="row">
-            <div class="col-md-3 col-sm-6" *ngFor="let itm of prdList">
-                <div class="card cursor" (click)="getPrdDtls(itm)"> <img [src]="path + itm.product_images[0]"
-                        (error)="updateUrl($event, itm)" class="card-img-top" alt="about-athos">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-8">
-                                <span class="card-title">{{itm.title}}</span>
-                            </div>
-                            <div class="col-4">
-                                <p class="card-title text-end">{{itm.price | currency: 'MYR ' }}</p>
-                            </div>
+
+    <div class="linear" *ngIf="filterList.length !== 0"></div>
+    <div class="row filter-group" *ngIf="filterList.length !== 0">
+        <div class="col-auto" *ngFor="let itm of filterList">
+            <button type="button" class="btn filter-button"> {{itm.viewValue + ' : ' + itm.name}} <span class="btn-close" (click)="deleteFilter(itm)"></span>
+                <!-- <button type="button" class="btn-close close pull-right" aria-label="Close"
+                (click)="deleteFilter(itm)"></button> -->
+        </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-sm-6" *ngFor="let itm of prdList">
+            <div class="card cursor" (click)="getPrdDtls(itm)"> <img [src]="path + itm.product_images[0]"
+                    (error)="this.aS.updateUrl($event, itm)" class="card-img-top" alt="about-athos">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-8">
+                            <span class="card-title">{{itm.title}}</span>
                         </div>
-                        <span class="card-subtitle mb-2 text-muted" *ngFor="let it of this.catList">
-                            {{itm.category === it.id ? it.name : ''}}
-                        </span>
+                        <div class="col-4">
+                            <p class="card-title text-end">{{itm.price | currency: 'MYR ' }}</p>
+                        </div>
                     </div>
+                    <span class="card-subtitle mb-2 text-muted" *ngFor="let it of this.catList">
+                        {{itm.category === it.id ? it.name : ''}}
+                    </span>
                 </div>
             </div>
         </div>

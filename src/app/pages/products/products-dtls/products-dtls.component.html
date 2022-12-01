@@ -1,13 +1,13 @@
 <div class="content">
     <div class="row prd-card">
         <div class="col-md-6 prd-carousel">
-            <img [src]="this.carouselImg" (error)="updateUrl($event)" class="card-img-top" alt="about-athos">
+            <img [src]="this.carouselImg" (error)="this.aS.updateUrl($event, this.carouselImg)" class="card-img-top" alt="about-athos">
             <div>
                 <carousel [itemsPerSlide]="5" [singleSlideOffset]="true" [indicatorsByChunk]="true" [interval]="0"
                     [showIndicators]="false" [noWrap]="true">
                     <div class="carousel-inner">
                         <slide *ngFor="let prd of this.carouselList">
-                            <img [src]="prd" alt="image slide" (error)="updateUrl($event)" (click)="changeImg(prd)">
+                            <img [src]="prd" alt="image slide" (error)="this.aS.updateUrl($event, prd)" (click)="changeImg(prd)">
                         </slide>
                     </div>
                 </carousel>
@@ -18,11 +18,11 @@
             <h3>{{prdDtls?.title}}</h3>
             <div class="mb-2 text-muted">
                 <span *ngFor="let it of this.catList">
-                    {{prdDtls.category === it.id ? it.name : ''}}
+                    {{prdDtls?.category === it.id ? it.name : ''}}
                 </span>
             </div>
             <div class="card-text">
-                <span>{{prdDtls?.price | currency: 'MYR '}}</span>
+                <span>{{selectedPrice | currency: 'MYR '}}</span>
             </div>
             <div class="colour-tab">
                 <h5>Colour</h5>
@@ -39,7 +39,7 @@
                         <tab>
                             <ng-template tabHeading>
                                 <img [src]="color.product_variant_images[0]" (click)="changeColor(color)"
-                                    (error)="updateUrl($event, color.product_variant_images[0])">
+                                    (error)="this.aS.updateUrl($event, color.product_variant_images[0])">
                             </ng-template>
 
                         </tab>
@@ -77,7 +77,7 @@
                 <div class="carousel-inner">
                     <slide *ngFor="let itm of this.viewList">
                         <div class="card cursor" (click)="getPrdDtls(itm)"> <img [src]="itm.product_images[0]"
-                                (error)="updateUrl($event, itm)" class="card-img-top" alt="about-athos">
+                                (error)="this.aS.updateUrl($event, itm)" class="card-img-top" alt="about-athos">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-8">

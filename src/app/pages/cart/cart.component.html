@@ -12,7 +12,7 @@
                             <div class="row">
                                 <div class="col-4">
                                     <img [src]="cart.selected_variant.product_variant_images[0]"
-                                        (error)="updateUrl($event, cart)" class="cart-img" alt="about-athos">
+                                        (error)="this.aS.updateUrl($event, cart.selected_variant.product_variant_images[0])" class="cart-img" alt="about-athos">
                                 </div>
                                 <div class="col-8">
                                     <div class="row">

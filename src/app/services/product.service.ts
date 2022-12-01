@@ -10,15 +10,16 @@ export class ProductService {
   cartList: any[] = [];
   viewList: any[] = [];
   catList: any[] = [];
+  sizeList: any[] = [];
+  colorList: any[] = [];
   path = environment.path;
-
 
   constructor(
     private http: HttpClient
   ) { }
 
-  getPrdList(params = {}) {
-    return this.http.get(this.path + `/v1/products/`, { params });
+  getPrdList(filter: any) {
+    return this.http.get(this.path + `/v1/products/`+ filter);
   }
 
   getPrdDtls(id: any) {
@@ -29,6 +30,24 @@ export class ProductService {
     this.http.get(this.path + `/v1/category-lists/`).subscribe((res: any) => {
       if (res.status_code == 200) {
         this.catList = res.info.results
+      }
+    });
+  }
+
+  getColorList() {
+    this.http.get(this.path + `/v1/category/color/`).subscribe((res: any) => {
+      if (res.status_code == 200) {
+        this.colorList = res.info.results;
+        this.colorList.map(obj => obj.name = obj.value);
+      }
+    });
+  }
+
+  getSizeList() {
+    this.http.get(this.path + `/v1/category/size/`).subscribe((res: any) => {
+      if (res.status_code == 200) {
+        this.sizeList = res.info.results;
+        this.sizeList.map(obj => obj.name = obj.value);
       }
     });
   }

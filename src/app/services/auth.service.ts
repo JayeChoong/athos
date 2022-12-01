@@ -9,6 +9,7 @@ import { HeaderInterceptor } from '../interceptors/header.interceptor';
 })
 export class AuthService {
   path = environment.path;
+  basePath = environment.base;
   usrDtls: any;
 
   constructor(
@@ -26,8 +27,9 @@ export class AuthService {
       email: value.email,
       password1: value.password1,
       password2: value.password2,
-      first_name: value.first_name,
-      last_name: value.last_name
+      phone_number: value.phone_number
+      // first_name: value.first_name,
+      // last_name: value.last_name
     }
     return this.http.post(this.path + `/rest-auth/registration/`, body);
 
@@ -58,7 +60,15 @@ export class AuthService {
     return this.http.post(this.path + `/rest-auth/password/change/`, body)
   }
 
-  updateUsrDtls(body: any) {
+  updateUsrDtls(value: any) {
+    console.log(value);
+    const body = {
+      first_name: value.first_name,
+      last_name: value.last_name,
+      phone_number: value.phone_number,
+      home_address: value.home_address,
+      delivery_address: value.delivery_address
+    }
     return this.http.put(this.path + `/rest-auth/user/`, body)
   }
 
@@ -79,7 +89,6 @@ export class AuthService {
     return this.http.post(this.path + `/rest-auth/password/reset/confirm/`, body)
   }
 
-
   verifyEmail(key: any) {
     const body = {
       key: key,
@@ -88,27 +97,12 @@ export class AuthService {
 
   }
 
-
-  // refreshToken() {
-  //   const authStored = localStorage.getItem('authLogedin') || `{}`;
-  //   const data = JSON.parse(authStored);
-  //   this.http.post(this.path + `/rest-auth/token/refresh/`, { refresh: data.refresh_token }).subscribe((res: any) => {
-  //     data.access_token = res.info.access;
-  //     localStorage.setItem('authLogedin', JSON.stringify(data));
-  //   });
-
-  refreshToken() {
-    const authStored = localStorage.getItem('authLogedin') || `{}`;
-    const data = JSON.parse(authStored);
-    return this.http.post(this.path + `/rest-auth/token/refresh/`, { refresh: data.refresh_token })
-
-    // const authStored = localStorage.getItem('authLogedin') || `{}`;
-    // const data = JSON.parse(authStored);
-    this.http.post(this.path + `/rest-auth/token/refresh/`, { refresh: data.refresh_token }).subscribe((res: any) => {
-      data.access_token = res.info.access;
-      localStorage.setItem('authLogedin', JSON.stringify(data));
-    });
-
-
+  updateUrl(evt: any, itm: any) {
+    if (evt.type === 'error') {
+      evt.target.src = this.basePath + itm;
+      // evt.target.src = './assets/about-attitude.png';
+    }
   }
-}
+  }
+
+

@@ -22,6 +22,7 @@ import { HttpInterceptorProviders } from './interceptors';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { CatalogueComponent } from './pages/catalogue/catalogue.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     CartComponent,
     ProfileComponent,
     EditProfileComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    CatalogueComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

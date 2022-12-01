@@ -92,10 +92,22 @@
                     <div *ngIf="registerError.password2.errors?.NoPassswordMatch">
                         Password is not matched
                     </div>
-
                 </div>
             </div>
             <div class="form-group">
+                <input type="text" formControlName="phone_number" class="form-control required" placeholder="Phone No"
+                    [ngClass]="{'is-invalid': (registerError.phone_number.touched || isSubmitRegister) && registerError.phone_number.errors}" />
+                <div *ngIf="registerError.phone_number.touched && registerError.phone_number.errors"
+                    class="invalid-feedback">
+                    <div *ngIf="registerError.phone_number.errors?.required">
+                        Phone Number is required
+                    </div>
+                    <div *ngIf="registerError.phone_number.errors?.pattern">
+                        Please enter a valid Phone Number
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="form-group">
                 <input type="text" formControlName="first_name" class="form-control required" placeholder="First Name"
                     [ngClass]="{'is-invalid': (registerError.first_name.touched || isSubmitRegister) && registerError.first_name.errors}" />
                 <div *ngIf="registerError.first_name.touched && registerError.first_name.errors"
@@ -104,8 +116,8 @@
                         First Name is required
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
+            </div> -->
+            <!-- <div class="form-group">
                 <input type="text" formControlName="last_name" class="form-control required" placeholder="Last Name"
                     [ngClass]="{'is-invalid': (registerError.last_name.touched || isSubmitRegister) && registerError.last_name.errors}" />
                 <div *ngIf="registerError.last_name.touched && registerError.last_name.errors" class="invalid-feedback">
@@ -113,7 +125,7 @@
                         Last Name is required
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="disclaimer">
                 <span class="text-muted">By creating an account, you agree to our Privacy Policy and Terms of
                     Use.</span>

@@ -17,9 +17,6 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (this.pS.catList.length == 0) {
-      this.pS.getCatList()
-    }
   }
 
   getLogin() {
@@ -33,4 +30,5 @@ export class HeaderComponent implements OnInit {
   getCart() {
       this.router.navigate(['/cart'])
   }
+
 }

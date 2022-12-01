@@ -1,0 +1,34 @@
+<div class="content">
+    <div>
+        <div class="row">
+            <div class="col-md-3 col-sm-6" *ngFor="let itm of slides">
+                <div class="cat-card">
+                    <video class="w-100" oncanplay="this.play()" onloadedmetadata="this.muted = true" loop>
+                        <source [src]="itm.image" type="video/mp4" />
+                    </video>
+                </div>
+                <div class="actionbtn">
+                    <button class="btn" [disabled]="!this.aS.isLogedin">Download</button>
+                </div>
+
+                <!-- 
+                <div class="card cursor" > <img [src]="path + itm.product_images[0]"
+                        (error)="this.aS.updateUrl($event, itm)" class="card-img-top" alt="about-athos">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <span class="card-title">{{itm.title}}</span>
+                            </div>
+                            <div class="col-4">
+                                <p class="card-title text-end">{{itm.price | currency: 'MYR ' }}</p>
+                            </div>
+                        </div>
+                        <span class="card-subtitle mb-2 text-muted" *ngFor="let it of this.catList">
+                            {{itm.category === it.id ? it.name : ''}}
+                        </span>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>

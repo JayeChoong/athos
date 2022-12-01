@@ -26,15 +26,12 @@ export class ProfileComponent implements OnInit {
   }
 
   logout() {
+    // localStorage.clear();
     this.aS.logout().subscribe({
       next: (res: any) => {
         localStorage.clear();
         this.router.navigate(['']);
         this.pS.cartList = [];
-      }, error: (err: any) => {
-        if (err.statusText == 'Unauthorized') {
-          this.aS.refreshToken();
-        }
       }
     });
   }

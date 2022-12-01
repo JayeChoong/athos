@@ -7,20 +7,27 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, finalize, retry, switchMap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
+import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
+import { ProductService } from '../services/product.service';
 
 
 @Injectable()
 export class HeaderInterceptor {
-  // baseUrl = environment.path
+  path = environment.path;
+  isRefreshingToken = false;
 
   constructor(
     public http: HttpClient,
-    private authService: AuthService
+    private aS: AuthService,
+    private router: Router,
+    private pS: ProductService
+
   ) { }
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any | HttpEvent<any>> {
     const authStored = localStorage.getItem('authLogedin') || `{}`;
     const token: string =
       authStored !== '' && Object.keys(JSON.parse(authStored)).length
@@ -31,23 +38,46 @@ export class HeaderInterceptor {
     }
     return next.handle(request)
       .pipe(
-        catchError((error: HttpErrorResponse) => {
+        catchError((error) => {
           if (error.status == 401) {
-            this.authService.refreshToken().subscribe((res: any) => {
-              if (res.status_code == 200) {
-                console.log('1')
-                const authStored = localStorage.getItem('authLogedin') || `{}`;
-                const data = JSON.parse(authStored);
-                data.access_token = res.info.access;
-                localStorage.setItem('authLogedin', JSON.stringify(data));
-              }
-              return next.handle(request)
-
-            });
+            if (!this.isRefreshingToken) {
+              this.isRefreshingToken = true;
+              return this.refreshToken().pipe(
+                switchMap((res: any) => {
+                  const authStored = localStorage.getItem('authLogedin') || `{}`;
+                  const data = JSON.parse(authStored);
+                  data.access_token = res.info.access;
+                  localStorage.setItem('authLogedin', JSON.stringify(data));
+                  request = request.clone({ setHeaders: { Authorization: `Bearer ${res.info.access}` } })
+                  return next.handle(request);
+                }), catchError(err => {
+                  localStorage.clear();
+                  this.pS.cartList = [];
+                  this.router.navigate(['/login']);
+                  return throwError(() => err)
+                }),
+                finalize(() => {
+                  this.isRefreshingToken = false;
+                })
+              );
+            }
           }
           return throwError(() => error)
         })
       );
   }
+
+  refreshToken() {
+    const authStored = localStorage.getItem('authLogedin') || `{}`;
+    const data = JSON.parse(authStored);
+    return this.http.post(this.path + `/rest-auth/token/refresh/`, { refresh: data.refresh_token });
+
+    // data.access_token = res.info.access;
+    // localStorage.setItem('authLogedin', JSON.stringify(data));
+
+
+  }
+
+
 
 }

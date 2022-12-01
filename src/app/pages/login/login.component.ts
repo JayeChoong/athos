@@ -34,8 +34,9 @@ export class LoginComponent implements OnInit {
       password: [null, [Validators.required]]
     });
     this.registerForm = this.fB.group({
-      first_name: [null],
-      last_name: [null],
+      // first_name: [null],
+      // last_name: [null],
+      phone_number: [null,[Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
       email: [null, [Validators.required, Validators.pattern("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")]],
       password1: [null, Validators.compose([
         Validators.required,
