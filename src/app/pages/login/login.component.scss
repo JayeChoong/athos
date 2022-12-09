@@ -6,6 +6,22 @@ form {
         width: 80%;
         margin: 10% auto;
     }
+
+    .form-check {
+        font-size: 12px;
+        box-shadow: none;
+    }
+
+    .form-check-input:checked {
+        background-color: #F80789;
+        border-color: #F80789;
+        box-shadow: none;
+
+    }
+
+    .form-floating {
+        color: darkslategrey
+    }
 }
 
 .forgotpwd-section {
@@ -15,12 +31,6 @@ form {
     a {
         color: black
     }
-}
-
-.disclaimer {
-    margin-bottom: 5%;
-    font-size: 11px;
-    text-align: center;
 }
 
 .tab-row {
@@ -48,5 +58,9 @@ form {
 
 .success-msg {
     text-align: center;
-    padding-top:10%;
+    padding-top: 10%;
+
+    button {
+        border: 1px solid black;
+    }
 }

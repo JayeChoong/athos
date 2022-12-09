@@ -13,7 +13,11 @@ export class ForgotPasswordComponent implements OnInit {
   declare resetForm: FormGroup;
   declare updateForm: FormGroup
   isSubmitReset = false;
-  isSubmitUpdate = false
+  isSubmitUpdate = false;
+  isSuccess = false;
+  msg: any;
+  msgType: any;
+  isAlert = false;
 
   constructor(
     public router: Router,
@@ -54,17 +58,39 @@ export class ForgotPasswordComponent implements OnInit {
 
   onReset() {
     this.isSubmitReset  = true;
+    this.isAlert = false;
     const resetValue = this.resetForm.value;
-    this.aS.resetPwd(resetValue).subscribe((res: any) => {
-    });
+    this.aS.resetPwd(resetValue).subscribe({
+      next:(res: any) => {
+      if (res.status_code == 200) {
+        this.isSuccess = true;
+        this.msg = res.message;
+      }
+    },
+    error: (err: any) => {
+      this.msg = err.error.message;
+      this.msgType = 'danger';
+      this.isAlert = true;
+    }});
   }
 
   onUpdate() {
+    this.isAlert = false;
     let auth;
     this.route.params.subscribe(params => auth = params);
     const updateValue = this.updateForm.value;
-    this.aS.updatePwd(updateValue,auth).subscribe((res: any) => {
-    });  
+    this.aS.updatePwd(updateValue,auth).subscribe({
+      next:(res: any) => {
+      if (res.status_code == 200) {
+        this.isSuccess = true;
+        this.msg = res.message;
+      }
+    },
+    error: (err: any) => {
+      this.msg = err.error.message;
+      this.msgType = 'danger';
+      this.isAlert = true;
+    }});
   }
 
 }

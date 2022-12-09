@@ -43,13 +43,45 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.catList = this.pS.catList;
-    this.sizeList = this.pS.sizeList;
-    this.colorList = this.pS.colorList;
+    if (this.pS.catList.length == 0) {
+      this.pS.getCatList().subscribe((res: any) => {
+        if (res.status_code == 200) {
+          this.catList = res.info.results;
+          this.pS.catList = this.catList;
+        }
+      });
+    } else {
+      this.catList = this.pS.catList;
+
+    }
+    if (this.pS.sizeList.length == 0) {
+      this.pS.getSizeList().subscribe((res: any) => {
+        if (res.status_code == 200) {
+          const list: any[] = res.info.results;
+          list.map(obj => obj.name = obj.value);
+          this.sizeList = list;
+          this.pS.sizeList = this.sizeList;
+        }
+      });
+    } else {
+      this.sizeList = this.pS.sizeList;
+    }
+    if (this.pS.colorList.length == 0) {
+      this.pS.getColorList().subscribe((res: any) => {
+        if (res.status_code == 200) {
+          const list: any[] = res.info.results;
+          list.map(obj => obj.name = obj.value);
+          this.colorList = list;
+          this.pS.colorList = this.colorList;
+        }
+      });
+    } else {
+      this.colorList = this.pS.colorList;
+    }
     this.getPrdList();
   }
 
-  getPrdList(params: any = {}) {
+  getPrdList() {
     let filter = '?';
 
     if (this.sortBy == 1) {
@@ -95,7 +127,7 @@ export class ProductsComponent implements OnInit {
     this.filterList = this.filterList.filter(obj => obj.value !== 'search');
     if (keyword !== '') {
       this.filterList.push({ value: 'search', name: keyword.toString().toLowerCase(), viewValue: 'Search' })
-    } 
+    }
     this.getPrdList();
   }
 
@@ -145,7 +177,7 @@ export class ProductsComponent implements OnInit {
 
     if (evt.checked) {
       // if (itm.min != 0) {
-        this.filterList.push({ value: 'price', min: itm.min, max: itm.max, viewValue: 'Price', name: itm.name})
+      this.filterList.push({ value: 'price', min: itm.min, max: itm.max, viewValue: 'Price', name: itm.name })
       // }
       // if (itm.max != 0) {
       //   this.filterList.push({ value: 'max_var_price', name: itm.max })
@@ -185,7 +217,7 @@ export class ProductsComponent implements OnInit {
       this.searchPrd(true);
     }
     if (itm.viewValue == 'Price') {
-      this.changePrice({checked: false}, itm);
+      this.changePrice({ checked: false }, itm);
     }
 
   }

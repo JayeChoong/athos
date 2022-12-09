@@ -10,14 +10,21 @@
 
 @font-face {
     font-family: 'Gotham';
-    src: url('./assets/fonts/bd317adf74e5e7e564eb61ce9926cc6d.woff2') format('woff2');
-}
+    src:url('./assets/fonts/Gotham-Light.otf') format('truetype'),
+      url('./assets/fonts/GothamLight.ttf') format('truetype'),}
+
+@font-face {
+    font-family: "Gotham-bold";
+    src:url('./assets/fonts/Gotham-Bold.otf') format('truetype'),
+      url('./assets/fonts/GothamBold.ttf') format('truetype'),
+    //   url('https://codezero.app/assets/font/Zenith-bold.woff') format('woff');
+  }
 
 
 body {
     line-height: 1.5 !important;
     letter-spacing: 1px !important;
-    font-family: Gotham !important;
+    font-family: 'Gotham' !important;
 }
 
 .cursor {
@@ -25,7 +32,7 @@ body {
 }
 
 .primary-font {
-    font-family: Dumbnerd !important;
+    font-family: 'Dumbnerd' !important;
 }
 
 .neon-pink {

@@ -84,7 +84,7 @@
     .dropdown-menu {
         padding: 5% 15%;
         overflow-x: scroll;
-        height: 300px;
+        max-height: 300px;
 
         .nav-item {
             margin: 2% 0;

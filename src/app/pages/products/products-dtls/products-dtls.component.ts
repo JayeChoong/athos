@@ -18,8 +18,7 @@ export class ProductsDtlsComponent implements OnInit {
   prdDtls: any;
   catList: any[] = [];
   viewList: any[] = [];
-  sizeList: any[] = [
-    { name: 'XXS' }, { name: 'XS' }, { name: 'S' }, { name: 'M' }, { name: 'L' }, { name: 'XL' }, { name: 'XXL' }]
+  sizeList: any[] = []
   colorList: any[] = []
   path = environment.base;
   selectedColor: any;
@@ -36,11 +35,32 @@ export class ProductsDtlsComponent implements OnInit {
     private route: ActivatedRoute,
     public aS: AuthService,
     private modalService: BsModalService
-  ) {
-    this.catList = this.pS.catList;
-  }
+  ) { }
 
   ngOnInit(): void {
+    if (this.pS.catList.length == 0) {
+      this.pS.getCatList().subscribe((res: any) => {
+        if (res.status_code == 200) {
+          this.catList = res.info.results;
+          this.pS.catList = this.catList;
+        }
+      });
+    } else {
+      this.catList = this.pS.catList;
+
+    }
+    if (this.pS.sizeList.length == 0) {
+      this.pS.getSizeList().subscribe((res: any) => {
+        if (res.status_code == 200) {
+          const list: any[] = res.info.results;
+          list.map(obj => obj.name = obj.value);
+          this.sizeList = list;
+          this.pS.sizeList = this.sizeList;
+        }
+      });
+    } else {
+      this.sizeList = this.pS.sizeList;
+    }
     this.prdId = this.route.snapshot.params['id'];
     this.viewList = this.pS.viewList.filter(itm => itm.id != this.prdId);
     const w = window.innerWidth;
@@ -49,6 +69,10 @@ export class ProductsDtlsComponent implements OnInit {
     } else if (w <= 1250) {
       this.slide = 1;
     };
+    this.getPrdDtls();
+  }
+
+  getPrdDtls() {
     this.pS.getPrdDtls(this.prdId).subscribe(async (res: any) => {
       if (res.status_code == 200) {
         this.prdDtls = await res.info;
@@ -137,11 +161,17 @@ export class ProductsDtlsComponent implements OnInit {
       };
 
       if (this.aS.isLogedin) {
-        this.pS.addToCart(cart).subscribe((res: any) => {
-          if (res.status_code == 201) {
-            this.pushToCart(cart);
-          } else if (res.status_code == 406) {
-            this.pS.updateCart(cart);
+        this.pS.addToCart(cart).subscribe({
+          next: (res: any) => {
+            if (res.status_code == 201) {
+              this.pushToCart(cart);
+            }
+          },
+          error: (err: any) => {
+            if (err.status_code == 406) {
+              console.log('1')
+              this.pS.updateCart(cart);
+            }
           }
         });
       } else {
@@ -163,9 +193,9 @@ export class ProductsDtlsComponent implements OnInit {
     }
   }
 
-  getPrdDtls(itm: any) {
-    this.pS.selectedPrd = itm;
-    this.router.navigate(['/products/product-details'])
+  getViewPrdDtls(itm: any) {
+    // this.pS.selectedPrd = itm;
+    this.router.navigate(['/products/product-details/' + itm.id])
   }
 
   changeSize(itm: any) {
@@ -189,6 +219,20 @@ export class ProductsDtlsComponent implements OnInit {
     this.selectedColor = itm.color;
     this.selectedPrice = itm.price
     this.sizeList.map(it => it.active = false);
+    this.prdDtls.product_variants.forEach((itm: any) => {
+      this.colorList.forEach((obj: any) => {
+        if (obj.color === this.selectedColor) {
+          for (const it of obj.variants) {
+            this.sizeList.map((i: any) => {
+              if (it.size === i.name && it.qty !== 0) {
+                i.available = true;
+                i.id = it.id
+              }
+            })
+          }
+        }
+      })
+    });
     this.selectedSize = null;
     this.isSelected = false;
     this.isNew = true;

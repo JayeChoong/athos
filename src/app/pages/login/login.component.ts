@@ -4,6 +4,7 @@ import { CustomValidators } from 'src/app/class/custom-validators';
 import { AuthService } from 'src/app/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-login',
@@ -21,13 +22,16 @@ export class LoginComponent implements OnInit {
   msgType: any;
   isAlert = false;
   isSuccess = false;
+  isChecked = false;
+  modalRef?: BsModalRef;
 
   constructor(
     private fB: FormBuilder,
     private aS: AuthService,
     public router: Router,
     private route: ActivatedRoute,
-    private pS: ProductService
+    private pS: ProductService,
+    private modalService: BsModalService
   ) {
     this.loginForm = this.fB.group({
       email: [null, [Validators.required, Validators.pattern("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")]],
@@ -36,7 +40,7 @@ export class LoginComponent implements OnInit {
     this.registerForm = this.fB.group({
       // first_name: [null],
       // last_name: [null],
-      phone_number: [null,[Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+      phone_number: [null, [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
       email: [null, [Validators.required, Validators.pattern("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")]],
       password1: [null, Validators.compose([
         Validators.required,
@@ -101,18 +105,23 @@ export class LoginComponent implements OnInit {
 
   onRegister() {
     this.isSubmitRegister = true;
+    if (this.registerForm.invalid || !this.isChecked) {
+      return;
+    }
+
     const registerValue = this.registerForm.value;
-    this.aS.registerAccount(registerValue).subscribe((res: any) => {
-
-      if (res.status_code == 201) {
-        this.isSuccess = true;
-        // localStorage.setItem('authLogedin', JSON.stringify(res.info));
-        // this.router.navigate([''])
-      } else {
+    this.aS.registerAccount(registerValue).subscribe({
+      next: (res: any) => {
+        if (res.status_code == 201) {
+          this.isSuccess = true;
+          // localStorage.setItem('authLogedin', JSON.stringify(res.info));
+          // this.router.navigate([''])
+        }
+      },
+      error: (err: any) => {
+        this.msg = err.error.message;
         this.msgType = 'danger';
-        this.msg = 'asdasdasdas';
         this.isAlert = true;
-
       }
     });
   }
@@ -120,6 +129,11 @@ export class LoginComponent implements OnInit {
   // getIsChecked() {
   //   this.isChecked = !this.isChecked
   // }
+
+  openModal(content: any) {
+    this.modalRef = this.modalService.show(content,
+      Object.assign({}, { class: 'modal-lg' }));
+  }
 
 
 

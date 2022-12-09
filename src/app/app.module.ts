@@ -23,6 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CatalogueComponent } from './pages/catalogue/catalogue.component';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 @NgModule({
   declarations: [
@@ -51,12 +52,11 @@ import { CatalogueComponent } from './pages/catalogue/catalogue.component';
     AlertModule,
     BrowserAnimationsModule,
     BsDropdownModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    TooltipModule.forRoot()
   ],
   providers: [
     HttpInterceptorProviders
-    
-
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: HeaderInterceptor,

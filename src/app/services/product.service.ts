@@ -27,33 +27,40 @@ export class ProductService {
   }
 
   getCatList() {
-    this.http.get(this.path + `/v1/category-lists/`).subscribe((res: any) => {
+    return this.http.get(this.path + `/v1/category-lists/`);
+
+    this.http.get(this.path + `/v1/category-lists/`).subscribe(async(res: any) => {
       if (res.status_code == 200) {
-        this.catList = res.info.results
+        this.catList = await res.info.results
       }
     });
   }
 
   getColorList() {
-    this.http.get(this.path + `/v1/category/color/`).subscribe((res: any) => {
+    return this.http.get(this.path + `/v1/category/color/`);
+
+    this.http.get(this.path + `/v1/category/color/`).subscribe(async(res: any) => {
       if (res.status_code == 200) {
-        this.colorList = res.info.results;
-        this.colorList.map(obj => obj.name = obj.value);
+        const list: any[] = res.info.results;
+        list.map(obj => obj.name = obj.value);
+        this.colorList = await list;
       }
     });
   }
 
   getSizeList() {
-    this.http.get(this.path + `/v1/category/size/`).subscribe((res: any) => {
+    return this.http.get(this.path + `/v1/category/size/`);
+
+    this.http.get(this.path + `/v1/category/size/`).subscribe(async(res: any) => {
       if (res.status_code == 200) {
-        this.sizeList = res.info.results;
-        this.sizeList.map(obj => obj.name = obj.value);
+        const list: any[] = res.info.results;
+        list.map(obj => obj.name = obj.value);
+        this.sizeList = await list;
       }
     });
   }
 
   addToCart(cart: any) {
-    console.log(cart);
     let body = {
       product: cart.product.id,
       quantity: cart.quantity,

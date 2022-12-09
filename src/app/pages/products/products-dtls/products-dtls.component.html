@@ -1,13 +1,15 @@
 <div class="content">
     <div class="row prd-card">
         <div class="col-md-6 prd-carousel">
-            <img [src]="this.carouselImg" (error)="this.aS.updateUrl($event, this.carouselImg)" class="card-img-top" alt="about-athos">
+            <img [src]="this.carouselImg" (error)="this.aS.updateUrl($event, this.carouselImg)" class="card-img-top"
+                alt="about-athos">
             <div>
                 <carousel [itemsPerSlide]="5" [singleSlideOffset]="true" [indicatorsByChunk]="true" [interval]="0"
                     [showIndicators]="false" [noWrap]="true">
                     <div class="carousel-inner">
                         <slide *ngFor="let prd of this.carouselList">
-                            <img [src]="prd" alt="image slide" (error)="this.aS.updateUrl($event, prd)" (click)="changeImg(prd)">
+                            <img [src]="prd" alt="image slide" (error)="this.aS.updateUrl($event, prd)"
+                                (click)="changeImg(prd)">
                         </slide>
                     </div>
                 </carousel>
@@ -34,11 +36,13 @@
                         </li>
                     </ng-container>
                 </ul> -->
+
                 <tabset>
                     <ng-container *ngFor="let color of colorList">
                         <tab>
                             <ng-template tabHeading>
-                                <img [src]="color.product_variant_images[0]" (click)="changeColor(color)"
+                                <img [ngbTooltip]="color.color"
+                                    [src]="color.product_variant_images[0]" (click)="changeColor(color)"
                                     (error)="this.aS.updateUrl($event, color.product_variant_images[0])">
                             </ng-template>
 
@@ -47,7 +51,8 @@
                 </tabset>
             </div>
             <div class="size-tab">
-                <h5>Size<span (click)="openModal(sizeChart)" class="cursor float-end text-decoration-underline">Size Guide</span></h5>
+                <h5>Size<span (click)="openModal(sizeChart)" class="cursor float-end text-decoration-underline">Size
+                        Guide</span></h5>
                 <ul class="navbar-nav">
                     <ng-container *ngFor="let size of sizeList">
                         <li class="nav-item cursor" (click)="changeSize(size)"
@@ -76,7 +81,7 @@
             <carousel [itemsPerSlide]="slide" [showIndicators]="false">
                 <div class="carousel-inner">
                     <slide *ngFor="let itm of this.viewList">
-                        <div class="card cursor" (click)="getPrdDtls(itm)"> <img [src]="itm.product_images[0]"
+                        <div class="card cursor" (click)="getViewPrdDtls(itm)"> <img [src]="itm.product_images[0]"
                                 (error)="this.aS.updateUrl($event, itm)" class="card-img-top" alt="about-athos">
                             <div class="card-body">
                                 <div class="row">
@@ -105,12 +110,12 @@
     <div class="modal-header">
         <h5 class="modal-title pull-left">Size Guide</h5>
         <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
-          <span aria-hidden="true" class="visually-hidden">&times;</span>
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
         </button>
-      </div>
-      <div class="modal-body">
+    </div>
+    <div class="modal-body">
         <img src="./assets/size1.png" class="about-img" alt="about-athos">
         <img src="./assets/size2.png" class="about-img" alt="about-athos">
         <img src="./assets/size3.png" class="about-img" alt="about-athos">
-      </div>
+    </div>
 </ng-template>

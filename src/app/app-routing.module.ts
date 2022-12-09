@@ -49,7 +49,7 @@ const routes: Routes = [
         component: ForgotPasswordComponent
       },
       {
-        path: 'reset-password/:uid/:token',
+        path: 'password-reset/:uid/:token',
         component: ForgotPasswordComponent
       },
       {
@@ -68,7 +68,7 @@ const routes: Routes = [
     anchorScrolling: 'enabled',
     initialNavigation: 'enabledBlocking',
     scrollOffset: [0, 0],
-    onSameUrlNavigation: 'reload' 
+    onSameUrlNavigation: 'reload',
 })],
   exports: [RouterModule]
 })

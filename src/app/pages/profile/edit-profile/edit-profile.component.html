@@ -2,10 +2,11 @@
     <div *ngIf="this.router.url === '/profile/change-password'">
         <div class="section">CHANGE PASSWORD</div>
         <form [formGroup]="pwdForm">
-            <div class="form-group">
+            <div class="form-group form-floating">
                 <input type="password" formControlName="password1" class="form-control required" placeholder="Password"
                     [ngClass]="{'is-invalid': (pwdError.password1.touched || isSubmitPwd) && pwdError.password1.errors}" />
-                <div *ngIf="pwdError.password1.touched && pwdError.password1.errors" class="invalid-feedback">
+                    <label for="floatingInput">Password</label>
+                    <div *ngIf="pwdError.password1.touched && pwdError.password1.errors" class="invalid-feedback">
                     <div *ngIf="pwdError.password1.errors?.required">
                         Password is required
                     </div>
@@ -26,11 +27,12 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group form-floating">
                 <input type="password" formControlName="password2" class="form-control required"
                     placeholder="Confirm Password"
                     [ngClass]="{'is-invalid': (pwdError.password2.touched || isSubmitPwd) && pwdError.password2.errors}" />
-                <div *ngIf="pwdError.password2.touched && pwdError.password2.errors" class="invalid-feedback">
+                    <label for="floatingInput">Confirm Password</label>
+                    <div *ngIf="pwdError.password2.touched && pwdError.password2.errors" class="invalid-feedback">
                     <div *ngIf="pwdError.password2.errors?.required">
                         Password is required
                     </div>
@@ -53,13 +55,15 @@
     <div *ngIf="this.router.url === '/profile/edit-profile'">
         <div class="section">EDIT PROFILE</div>
         <form [formGroup]="updateForm">
-            <div class="form-group">
+            <div class="form-group form-floating">
                 <input readonly class="form-control" type="text" name="email" formControlName="email">
+                <label for="floatingInput">Email Address</label>
             </div>
-            <div class="form-group">
+            <div class="form-group form-floating">
                 <input type="text" formControlName="phone_number" class="form-control required" placeholder="Phone No"
                     [ngClass]="{'is-invalid': (updateError.phone_number.touched || isSubmitUpdate) && updateError.phone_number.errors}" />
-                <div *ngIf="updateError.phone_number.touched && updateError.phone_number.errors"
+                    <label for="floatingInput">Phone No</label>
+                    <div *ngIf="updateError.phone_number.touched && updateError.phone_number.errors"
                     class="invalid-feedback">
                     <div *ngIf="updateError.phone_number.errors?.required">
                         Phone Number is required
@@ -70,42 +74,46 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group form-floating">
                 <input type="text" formControlName="first_name" class="form-control required" placeholder="First Name"
                     [ngClass]="{'is-invalid': (updateError.first_name.touched || isSubmitUpdate) && updateError.first_name.errors}" />
-                <div *ngIf="updateError.first_name.touched && updateError.first_name.errors" class="invalid-feedback">
+                    <label for="floatingInput">First Name</label>
+                    <div *ngIf="updateError.first_name.touched && updateError.first_name.errors" class="invalid-feedback">
                     <div *ngIf="updateError.first_name.errors?.required">
                         First Name is required
                     </div>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group form-floating">
                 <input type="text" formControlName="last_name" class="form-control required" placeholder="Last Name"
                     [ngClass]="{'is-invalid': (updateError.last_name.touched || isSubmitUpdate) && updateError.last_name.errors}" />
-                <div *ngIf="updateError.last_name.touched && updateError.last_name.errors" class="invalid-feedback">
+                    <label for="floatingInput">Last Name</label>
+                    <div *ngIf="updateError.last_name.touched && updateError.last_name.errors" class="invalid-feedback">
                     <div *ngIf="updateError.last_name.errors?.required">
                         Last Name is required
                     </div>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group form-floating">
                 <textarea class="form-control" formControlName="home_address" rows="3" placeholder="Home Address"
                     [ngClass]="{'is-invalid': (updateError.home_address.touched || isSubmitUpdate) && updateError.home_address.errors}"></textarea>
-                <div *ngIf="updateError.home_address.touched && updateError.home_address.errors"
+                    <label for="floatingInput">Home Address</label>
+                    <div *ngIf="updateError.home_address.touched && updateError.home_address.errors"
                     class="invalid-feedback">
                     <div *ngIf="updateError.home_address.errors?.required">
-                        Last Name is required
+                        Home Address is required
                     </div>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group form-floating">
                 <textarea class="form-control" formControlName="delivery_address" rows="3"
                     placeholder="Delivery Address"
                     [ngClass]="{'is-invalid': (updateError.delivery_address.touched || isSubmitUpdate) && updateError.delivery_address.errors}"></textarea>
-                <div *ngIf="updateError.delivery_address.touched && updateError.delivery_address.errors"
+                    <label for="floatingInput">Delivery Address</label>
+                    <div *ngIf="updateError.delivery_address.touched && updateError.delivery_address.errors"
                     class="invalid-feedback">
                     <div *ngIf="updateError.delivery_address.errors?.required">
-                        Last Name is required
+                        Delivery Address is required
                     </div>
                 </div>
             </div>
