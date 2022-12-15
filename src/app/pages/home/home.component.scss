@@ -4,7 +4,11 @@
 
 .about-container {
     text-align: center;
-    padding: 5%
+    padding: 5%;
+
+    @media only screen and (max-width: 1250px) {
+        padding-top: 10vh;
+    }
 }
 
 .carousel-container {
@@ -86,3 +90,14 @@
     background-color: black;
 }
 
+.prdCarousel {
+    video {
+        margin-bottom: -2%
+    }
+}
+
+.content {
+    @media only screen and (max-width: 1250px) {
+        margin-top: 0;
+    }
+}

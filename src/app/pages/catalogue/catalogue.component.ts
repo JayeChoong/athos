@@ -8,12 +8,12 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class CatalogueComponent implements OnInit {
   slides = [
-    {image: './assets/athos-logo-mobile.mp4'},
-    {image: './assets/athos-mobile.mp4'},
-    {image: './assets/athos-logo-mobile.mp4'},
-    {image: './assets/athos-mobile.mp4'},
-    {image: './assets/athos-logo-mobile.mp4'},
-    {image: './assets/athos-mobile.mp4'},
+    {image: './assets/carousel/athos-logo-mobile.mp4'},
+    {image: './assets/carousel/athos-mobile.mp4'},
+    {image: './assets/carousel/athos-logo-mobile.mp4'},
+    {image: './assets/carousel/athos-mobile.mp4'},
+    {image: './assets/carousel/athos-logo-mobile.mp4'},
+    {image: './assets/carousel/athos-mobile.mp4'},
   ];
 
   constructor(

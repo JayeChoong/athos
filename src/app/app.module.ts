@@ -38,13 +38,13 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     ProfileComponent,
     EditProfileComponent,
     ForgotPasswordComponent,
-    CatalogueComponent
+    CatalogueComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     NgbModule,
-    CarouselModule,
+    CarouselModule.forRoot(),
     TabsModule,
     HttpClientModule,
     ReactiveFormsModule,

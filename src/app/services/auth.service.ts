@@ -32,8 +32,6 @@ export class AuthService {
       // last_name: value.last_name
     }
     return this.http.post(this.path + `/rest-auth/registration/`, body);
-
-
   }
 
   login(value: any) {
@@ -61,7 +59,6 @@ export class AuthService {
   }
 
   updateUsrDtls(value: any) {
-    console.log(value);
     const body = {
       first_name: value.first_name,
       last_name: value.last_name,
@@ -103,6 +100,16 @@ export class AuthService {
       // evt.target.src = './assets/about-attitude.png';
     }
   }
+
+  sendFeedback(value: any) {
+    const body = {
+      email: value.email,
+      message: value.message,
+      first_name: value.first_name,
+      last_name: value.last_name
+    }
+    return this.http.post(this.path + `/v1/feedback/`, body)
   }
+}
 
 

@@ -1,12 +1,30 @@
 .footer {
     padding: 3%;
-    text-align: center;
-    background: #000000;        
+    // text-align: center;
+    background: #000000;
     color: #ffffff;
+    font-family: 'Gotham-bold';
 
     a {
         cursor: pointer;
         text-decoration: none;
         color: #ffffff;
     }
+
+    .col-md-3 {
+        p {
+            cursor: pointer;
+        }
+    }
+}
+
+form {
+    textarea {
+        height: auto;
+    }
+}
+
+.success-msg {
+    text-align: center;
+    padding: 5% 0;
 }

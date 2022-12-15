@@ -1,16 +1,16 @@
 <div class="header row px-3 pt-1 fixed-top primary-font">
-    <div class="col-4 text-menu" data-bs-toggle="offcanvas" data-bs-target="#menu" aria-controls="menu">
+    <div class="col-3 text-menu" data-bs-toggle="offcanvas" data-bs-target="#menu" aria-controls="menu">
         <a>MENU</a>
     </div>
-    <div class="col-4 text-center">
+    <div class="col-6 text-center">
         <a>ATHOS ATHLETE</a><span class="text-shadows mobile"> - Unleash The Giant in You</span>
     </div>
-    <div class="col-4 text-end">
-        <a (click)="getCart()" class="cursor position-relative">
+    <div class="col-3 text-end">
+        <!-- <a (click)="getCart()" class="cursor position-relative">
             <img src="./assets/icons/cart.png">
             <span *ngIf="this.pS.cartItem() !== 0" class="position-absolute translate-middle badge text-bg-secondary">
                 {{this.pS.cartItem()}}
-              </span></a>
+              </span></a> -->
         <a (click)="getLogin()" class="cursor"><img src="./assets/icons/user.png"></a>
     </div>
 </div>

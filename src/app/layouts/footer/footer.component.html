@@ -1,17 +1,122 @@
 <div class="footer" id="ContactUs">
-    <h6>ATHOS INNOVATION SDN.BHD. 202201020251(1465948-D)</h6>
-    <p>No.3, Jalan Mutiara Emas 6/1A,<br>
-        Taman Mount Austin, 81100 Johor Bahru,<br>
-        Johor, Malaysia</p>
-    <a href="mailto:general@athosathlete.com">general@athosathlete.com</a>
-    <div class="social-media pt-3">
-        <a href="https://www.facebook.com/profile.php?id=100083466349340" target="_blank"><img
-                src="./assets/icons/fb_white.png"></a>
-        <a href="https://instagram.com/athos.athlete?igshid=NmNmNjAwNzg=" target="_blank"><img
-                src="./assets/icons/insta_white.png"></a>
-        <a href="https://www.linkedin.com/company/athos-athlete/" target="_blank"><img
-                src="./assets/icons/linkedin_white.png"></a>
-        <a href="https://api.whatsapp.com/send?phone=601152224333" target="_blank"><img
-                src="./assets/icons/whatsapp_white.png"></a>
-    </div>
+        <div class="row">
+                <div class="col-md-6">
+                        <h6>ATHOS INNOVATION SDN.BHD. 202201020251(1465948-D)</h6>
+                        <p>No.3, Jalan Mutiara Emas 6/1A,<br>
+                                Taman Mount Austin, 81100 Johor Bahru,<br>
+                                Johor, Malaysia</p>
+                        <a href="mailto:general@athosathlete.com">general@athosathlete.com</a>
+                        <div class="social-media pt-3">
+                                <a href="https://www.facebook.com/profile.php?id=100083466349340" target="_blank"><img
+                                                src="./assets/icons/fb_white.png"></a>
+                                <a href="https://instagram.com/athos.athlete?igshid=NmNmNjAwNzg=" target="_blank"><img
+                                                src="./assets/icons/insta_white.png"></a>
+                                <a href="https://www.linkedin.com/company/athos-athlete/" target="_blank"><img
+                                                src="./assets/icons/linkedin_white.png"></a>
+                                <a href="https://api.whatsapp.com/send?phone=601152224333" target="_blank"><img
+                                                src="./assets/icons/whatsapp_white.png"></a>
+                        </div>
+                </div>
+                <div class="col-md-3">
+                        <p (click)="getRegister()" class="cursor">REGISTER AS MEMBER</p>
+                        <p>
+                                <a href="https://api.whatsapp.com/send?phone=601152224333" target="_blank">BECOME A
+                                        DEALER</a>
+                        </p>
+                        <p (click)="openModal(feedback)">SEND US FEEDBACK</p>
+                </div>
+                <div class="col-md-3">
+                        <p routerLink="supports/privacy-policy">PRIVACY POLICY</p>
+                        <p routerLink="supports/term-condition">TERM & CONDITION</p>
+                        <p routerLink="supports/refund-policy">REFUND POLICY</p>
+                </div>
+        </div>
 </div>
+
+<ng-template #feedback>
+        <div class="modal-header">
+                <h5 class="modal-title pull-left">Send Us Feedback</h5>
+                <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+                        <span aria-hidden="true" class="visually-hidden">&times;</span>
+                </button>
+        </div>
+        <div class="modal-body">
+                <div *ngIf="isSuccess">
+                        <div class="success-msg">
+                                <h1>Sent!</h1>
+                                <p>Your Feedback has successfully sent to our team!</p>
+                            </div>
+                </div>
+                <form [formGroup]="feedbackForm" *ngIf="!isSuccess">
+                        <div class="row">
+                                <div class="col-md-6">
+                                        <div class="form-group form-floating">
+                                                <input type="text" formControlName="first_name"
+                                                        class="form-control required" placeholder="First Name"
+                                                        [ngClass]="{'is-invalid': (formError.first_name.touched) && formError.first_name.errors}" />
+                                                <label for="floatingInput">First Name</label>
+                                                <div *ngIf="formError.first_name.touched && formError.first_name.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="formError.first_name.errors?.required">
+                                                                First Name is required
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="col-md-6">
+                                        <div class="form-group form-floating">
+                                                <input type="text" formControlName="last_name"
+                                                        class="form-control required" placeholder="Last Name"
+                                                        [ngClass]="{'is-invalid': (formError.last_name.touched || isSubmit) && formError.last_name.errors}" />
+                                                <label for="floatingInput">Last Name</label>
+                                                <div *ngIf="formError.last_name.touched && formError.last_name.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="formError.last_name.errors?.required">
+                                                                Last Name is required
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="form-group form-floating">
+                                <input type="email" formControlName="email" class="form-control required"
+                                        placeholder="Email Address"
+                                        [ngClass]="{ 'is-invalid':  (formError.email.touched || isSubmit) &&formError.email.errors }" />
+                                <label for="floatingInput">Email Address</label>
+                                <div *ngIf="formError.email.touched && formError.email.errors" class="invalid-feedback">
+                                        <div *ngIf="formError.email.errors?.required">
+                                                Email Address is required
+                                        </div>
+                                        <div *ngIf="formError.email.errors?.pattern">
+                                                Enter a valid email address
+                                        </div>
+                                </div>
+                        </div>
+
+                        <div class="form-group form-floating">
+                                <textarea class="form-control" formControlName="message" rows="3" placeholder="Message"
+                                        [ngClass]="{'is-invalid': (formError.message.touched || isSubmit) && formError.message.errors}"></textarea>
+                                <label for="floatingInput">Message</label>
+                                <div *ngIf="formError.message.touched && formError.message.errors"
+                                        class="invalid-feedback">
+                                        <div *ngIf="formError.message.errors?.required">
+                                                Message is required
+                                        </div>
+                                </div>
+                        </div>
+
+
+                        <!-- <div class="actionbtn"> -->
+                        <div class="row">
+                                <div class="col-6 actionbtn">
+                                        <button class="btn" (click)="modalRef?.hide()">CANCEL</button>
+                                </div>
+                                <div class="col-6 actionbtn">
+                                        <button class="btn" (click)="onSubmit()" [class.spinner]="isSubmit" [disabled]="isSubmit">SEND</button>
+                                </div>
+                        </div>
+                        <!-- </div> -->
+
+                </form>
+        </div>
+</ng-template>

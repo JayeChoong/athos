@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AppComponent } from './app.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { CatalogueComponent } from './pages/catalogue/catalogue.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
@@ -60,6 +61,10 @@ const routes: Routes = [
         path: 'catalogue',
         component: CatalogueComponent
       },
+      {
+        path: 'supports',
+        loadChildren: () => import('src/app/supports/supports.module').then(m => m.SupportsModule),
+      }
 ];
 
 @NgModule({

@@ -80,6 +80,10 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
     this.isSubmitLogin = true;
+
+    if (this.loginForm.invalid) {
+      return;
+    }
     const loginValue = this.loginForm.value;
     this.aS.login(loginValue).subscribe({
       next: (res: any) => {

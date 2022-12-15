@@ -8,12 +8,13 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class HomeComponent implements OnInit { 
   slides = [
-    {image: './assets/athos-logo-mobile.mp4'},
-    {image: './assets/athos-mobile.mp4'},
-    {image: './assets/athos-logo-mobile.mp4'},
-    {image: './assets/athos-mobile.mp4'},
-    {image: './assets/athos-logo-mobile.mp4'},
-    {image: './assets/athos-mobile.mp4'},
+    {image: './assets/carousel/D1.png'},
+    {image: './assets/carousel/D2.png'},
+    {image: './assets/carousel/D3.png'},
+    {image: './assets/carousel/D7.mp4', isVideo: true},
+    {image: './assets/carousel/D4.png'},
+    {image: './assets/carousel/D5.png'},
+    {image: './assets/carousel/D6.png'},
   ];
   slide: any;
 
