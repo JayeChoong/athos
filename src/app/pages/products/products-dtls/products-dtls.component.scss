@@ -33,9 +33,9 @@
 }
 
 .prd-carousel {
-    .card-img-top {
-        height: 75vh;
-    }
+    // .card-img-top {
+    //     height: 75vh;
+    // }
 
     carousel img {
         cursor: pointer;
@@ -173,3 +173,10 @@
         width: 100%;
     }
 }
+
+@media only screen and (max-width: 1250px) {
+    h3,h5 {
+        font-size: 100%;
+    }
+}
+
