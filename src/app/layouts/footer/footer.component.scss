@@ -4,6 +4,8 @@
     background: #000000;
     color: #ffffff;
     font-family: 'Gotham-bold';
+    position: relative;
+    z-index: 90;
 
     a {
         cursor: pointer;

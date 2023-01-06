@@ -13,7 +13,7 @@
 
 .carousel-container {
     .carousel-item {
-        height: 100vh;
+        height: 100vh;width: 100%;
     }
 
     img {
@@ -100,4 +100,54 @@
     @media only screen and (max-width: 1250px) {
         margin-top: 0;
     }
+}
+
+.randomCarousel {
+    position: relative;
+    display: block;
+    height: 80vh;
+    background: black;
+
+    @media only screen and (max-width: 1250px) {
+        height: 40vh
+    }
+
+    img {
+        position: absolute;
+        width: 25%;
+        transition: all 0.3s ease;
+
+        @media only screen and (max-width: 1250px) {
+            width: 45%;
+        }
+    }
+
+    img:hover {
+        transform: scale(1.25);
+        z-index: 999 !important;
+    }
+}
+
+.btn {
+    border-radius: 0;
+    position: absolute;
+    left: 40%;
+    width: 20%;
+    top: 45%;
+    height: 10%;
+    margin: auto;
+    background: #000;
+    color: #fff;
+
+    @media only screen and (max-width: 1250px) {
+        left: 35%;
+        width: 30%;
+        top: 40%;
+        height: 20%;
+    }
+}
+
+.btn:focus {
+    background: #000;
+    color: #fff;
 }

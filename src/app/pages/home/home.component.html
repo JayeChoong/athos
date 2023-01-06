@@ -38,18 +38,23 @@
     </div>
 </div>
 
-<div class="prdCarousel">
+<div class="randomCarousel">
+    <ng-container *ngFor="let slide of slides">
+        <img [style.left]="slide.left + '%'" [style.top]="slide.top+ '%'" [src]="slide.image" alt="carousel-img">
+    </ng-container>
+        <button class="btn" routerLink="/products">View Products</button>
+</div>
+
+<!-- <div class="prdCarousel">
     <carousel [itemsPerSlide]="slide" [showIndicators]="false" [singleSlideOffset]="true" [noWrap]="false">
-        <!-- <div class="carousel-inner"> -->
             <slide *ngFor="let slide of slides">
                     <video class="w-100"  oncanplay="this.play()" onloadedmetadata="this.muted = true" *ngIf="slide.isVideo" loop>
                         <source [src]="slide.image" type="video/mp4" />
                     </video>
                     <img class="w-100"  [src]="slide.image" *ngIf="!slide.isVideo" alt="carousel-img">
             </slide>
-        <!-- </div> -->
     </carousel>
-</div> 
+</div>  -->
 
 <div class="content">
     <div class="about-container" id="AboutUs">

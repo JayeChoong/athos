@@ -59,13 +59,22 @@
     border-bottom: 1px solid lightgray;
 }
 
+.filter-button-mobile,
+.form-control {
+    border-radius: 0.375rem !important;
+    border: 1px solid gray;
+    height: 40px
+}
+
+.offcanvas {
+    margin-top: 5vh;
+}
+ 
 .filter-group {
     margin-right: 2%;
     margin-bottom: 0.5rem;
 
-
-    .filter-button,
-    .form-control {
+    .filter-button {
         border-radius: 0.375rem !important;
         border: 1px solid gray;
         height: 40px
@@ -82,6 +91,11 @@
         border: 1px solid black;
     }
 
+    input[type=checkbox] {
+        cursor: pointer;
+        margin-right: 0.5rem;
+    }
+
     .dropdown-menu {
         padding: 5% 15%;
         overflow-x: scroll;
@@ -89,11 +103,6 @@
 
         .nav-item {
             margin: 2% 0;
-
-            input[type=checkbox] {
-                cursor: pointer;
-                margin-right: 0.5rem;
-            }
         }
 
         .col-4 {
@@ -130,5 +139,17 @@
     .card-title,
     .card-subtitle {
         font-size: 80%
+    }
+}
+
+@media only screen and (min-width: 1250px) {
+    .mobile {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 1250px) {
+    .desktop {
+        display: none;
     }
 }

@@ -10,15 +10,16 @@
 
 @font-face {
     font-family: 'Gotham';
-    src:url('./assets/fonts/Gotham-Light.otf') format('truetype'),
-      url('./assets/fonts/GothamLight.ttf') format('truetype'),}
+    src: url('./assets/fonts/Gotham-Light.otf') format('truetype'),
+        url('./assets/fonts/GothamLight.ttf') format('truetype'),
+}
 
 @font-face {
     font-family: "Gotham-bold";
-    src:url('./assets/fonts/Gotham-Bold.otf') format('truetype'),
-      url('./assets/fonts/GothamBold.ttf') format('truetype'),
-    //   url('https://codezero.app/assets/font/Zenith-bold.woff') format('woff');
-  }
+    src: url('./assets/fonts/Gotham-Bold.otf') format('truetype'),
+        url('./assets/fonts/GothamBold.ttf') format('truetype'),
+        //   url('https://codezero.app/assets/font/Zenith-bold.woff') format('woff');
+}
 
 
 body {
@@ -57,6 +58,8 @@ body {
     background-color: rgba(255, 255, 255, 0.8);
     padding: 5%;
     min-height: 70vh;
+    position: relative;
+    z-index: 99;
 
     @media only screen and (max-width: 1250px) {
         margin-top: 5vh;
@@ -82,7 +85,7 @@ body {
         background: #000;
         color: #fff;
     }
-    
+
     button:focus {
         background: #000;
         color: #fff;
@@ -119,5 +122,3 @@ form {
 .card-title {
     font-size: 16px;
 }
-
-
